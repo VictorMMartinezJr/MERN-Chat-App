@@ -52,14 +52,14 @@
   padding: 1rem 0 1rem 5px;
   border-radius: 10px;
   border: none;
-  background: #d6d6d6;
+  background: linear-gradient(to right, #e94057, #fdbb2d);
   margin: 1rem 0;
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
 }
 .submit-btn:hover {
-  background: #b8b8b8;
+  background: linear-gradient(to right, #e90826, #ffae00);
 }
 .guest-btn {
   background: #b8b8b8;
