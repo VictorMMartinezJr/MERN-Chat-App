@@ -9,8 +9,32 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const postDetails = () => {};
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const userLogin = { email, password };
+    if (!email || !password) {
+      console.log("Please enter all fields");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      fetch("/api/user/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userLogin),
+      }).then(console.log("Successful Login!"));
+
+      localStorage.setItem("userInfo", JSON.stringify(userLogin));
+      setLoading(false);
+      history.push("/chats");
+    } catch (error) {
+      console.log(error.data.message);
+      setLoading(false);
+      return;
+    }
+  };
 
   return (
     <form className="form">

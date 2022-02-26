@@ -67,3 +67,8 @@
 .guest-btn:hover {
   background: #d6d6d6;
 }
+/* Errors */
+.input-error {
+  font-size: 0.8rem;
+  color: red;
+}
