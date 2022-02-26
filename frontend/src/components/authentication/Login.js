@@ -5,32 +5,38 @@ import { useHistory } from "react-router-dom";
 const Login = () => {
   const [showPw, setShowPw] = useState(false);
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     setLoading(true);
-    const userLogin = { email, password };
-    if (!email || !password) {
-      console.log("Please enter all fields");
-      setLoading(false);
-      return;
-    }
 
     try {
-      fetch("/api/user/login", {
+      const res = await fetch("/api/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userLogin),
-      }).then(console.log("Successful Login!"));
+        body: JSON.stringify({ email, password }),
+      });
 
-      localStorage.setItem("userInfo", JSON.stringify(userLogin));
+      const data = await res.json();
+      console.log(data);
+      if (data.errors) {
+        setEmailError(data.errors.email);
+        setPasswordError(data.errors.password);
+      }
+      if (data._id) {
+        history.push("/chats");
+      }
+
+      localStorage.setItem("userInfo", JSON.stringify({ email, password }));
       setLoading(false);
-      history.push("/chats");
     } catch (error) {
-      console.log(error.data.message);
+      console.log("Error creating user");
       setLoading(false);
       return;
     }
@@ -53,6 +59,7 @@ const Login = () => {
               console.log(email);
             }}
           />
+          <span className="input-error">{emailError}</span>
         </div>
         {/* Password input */}
         <div className="input-container pw-input">
@@ -68,6 +75,7 @@ const Login = () => {
           <p className="show-pw" onClick={() => setShowPw(!showPw)}>
             {showPw ? "Hide" : "Show"}
           </p>
+          <span className="input-error">{passwordError}</span>
         </div>
         {!loading && (
           <button type="submit" className="submit-btn" onClick={handleSubmit}>

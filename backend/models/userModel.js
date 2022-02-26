@@ -22,6 +22,21 @@ const userSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+// Static method to login user
+userSchema.statics.login = async function (email, password) {
+  const user = await User.findOne({ email });
+
+  if (user) {
+    const auth = await bcrypt.compare(password, user.password);
+    if (auth) {
+      return user;
+    }
+    throw Error("Incorrect password");
+  }
+
+  throw Error("Incorrect email");
+};
+
 // Check if hashed password matches
 userSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
