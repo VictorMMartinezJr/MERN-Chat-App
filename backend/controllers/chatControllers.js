@@ -90,7 +90,7 @@ const createGroupChat = asyncHandler(async (req, res) => {
 
   try {
     const groupChat = await Chat.create({
-      chatName: req.body.name,
+      chatName: req.body.chatName,
       users: users,
       isGroupChat: true,
       groupAdmin: req.user,
@@ -107,4 +107,23 @@ const createGroupChat = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { accessChat, fetchChats, createGroupChat };
+const renameGroupChat = asyncHandler(async (req, res) => {
+  const { chatId, chatName } = req.body;
+
+  const updateChatName = await Chat.findByIdAndUpdate(
+    chatId,
+    { chatName },
+    { new: true }
+  )
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password");
+
+  if (!updateChatName) {
+    res.status(404);
+    throw new Error("Cannot find chat");
+  } else {
+    res.json(updateChatName);
+  }
+});
+
+module.exports = { accessChat, fetchChats, createGroupChat, renameGroupChat };
