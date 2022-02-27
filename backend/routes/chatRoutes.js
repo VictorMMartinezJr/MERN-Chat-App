@@ -4,6 +4,8 @@ const {
   fetchChats,
   createGroupChat,
   renameGroupChat,
+  addToGroup,
+  removeFromGroup,
 } = require("../controllers/chatControllers");
 const requireAuth = require("../middleware/authMiddleware");
 
@@ -13,7 +15,7 @@ router.post("/", requireAuth, accessChat);
 router.get("/", requireAuth, fetchChats);
 router.post("/group", requireAuth, createGroupChat);
 router.put("/rename", requireAuth, renameGroupChat);
-// router.put("/groupadd", requireAuth, addToGroup);
-// router.put("/groupremove", requireAuth, removeFromGroup);
+router.put("/groupadd", requireAuth, addToGroup);
+router.put("/groupremove", requireAuth, removeFromGroup);
 
 module.exports = router;
