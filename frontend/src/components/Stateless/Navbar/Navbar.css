@@ -1,0 +1,60 @@
+.navbar {
+  height: 6vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-title {
+  margin-left: 0.5rem;
+  font-size: 2rem;
+}
+.right-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+.bell-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: #d82148;
+}
+.nav-user {
+  height: 80%;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.user-avatar {
+  height: 60px;
+  width: 60px;
+  border-radius: 10px;
+  object-fit: contain;
+  margin-right: 0.5rem;
+}
+.nav-user-menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  display: none;
+  width: 100%;
+  border-radius: 10px;
+}
+.nav-user-menu p {
+  padding: 0.3rem 0;
+}
+
+.nav-user-menu p:nth-child(1) {
+  border-bottom: 1px solid #707070;
+}
+.nav-user-menu.active {
+  display: block;
+}
