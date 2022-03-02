@@ -2,6 +2,7 @@ import "./SearchRight.css";
 import { BiSearch } from "react-icons/bi";
 import { useContext, useState } from "react";
 import { Chat } from "../../../context/ChatProvider";
+import SearchedUser from "../SearchedUser";
 
 const SearchRight = () => {
   const { user } = useContext(Chat);
@@ -40,7 +41,9 @@ const SearchRight = () => {
         <p className="search-error">{search ? "" : searchError}</p>
       </div>
       {searchResults &&
-        searchResults.map((user) => <li key={user._id}>{user.name}</li>)}
+        searchResults.map((user) => (
+          <SearchedUser user={user} key={user._id} />
+        ))}
     </section>
   );
 };
