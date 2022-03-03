@@ -7,20 +7,22 @@ import SearchedUser from "../SearchedUser";
 const SearchRight = () => {
   const { user } = useContext(Chat);
   const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState();
+  const [searchResults, setSearchResults] = useState([]);
   const [searchError, setSearchError] = useState();
 
   const handleSearch = async () => {
     if (!search) {
       setSearchError("Search empty");
+      return;
     }
     try {
       const res = await fetch(`/api/user?search=${search}`, {
         method: "GET",
-        headers: { Authorization: `Bearer ${user.token}` },
+        headers: { Authorization: `Bearer ${user.token}` }, // Use logged in user's jwt
       });
       const data = await res.json();
       setSearchResults(data);
+      console.log(data);
     } catch (err) {
       console.log(err.message);
     }
@@ -36,13 +38,19 @@ const SearchRight = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button onClick={handleSearch}>Go</button>
+        <button onClick={handleSearch} className="search-btn">
+          Go
+        </button>
         <BiSearch className="search-icon" />
         <p className="search-error">{search ? "" : searchError}</p>
       </div>
       {searchResults &&
-        searchResults.map((user) => (
-          <SearchedUser user={user} key={user._id} />
+        searchResults.map((searchedUser) => (
+          <SearchedUser
+            searchedUser={searchedUser}
+            key={searchedUser._id}
+            onClick={() => console.log("clicked")}
+          />
         ))}
     </section>
   );
