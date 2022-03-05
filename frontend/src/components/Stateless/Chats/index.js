@@ -7,7 +7,7 @@ import NewGroupModal from "../NewGroupModal";
 const Chats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
   const [modalOpen, setModalOpen] = useState(false);
-  const { user, chats, setChats, setSelectedChat } = useContext(Chat);
+  const { user, chats, setChats } = useContext(Chat);
 
   const fetchChats = async () => {
     const config = {
@@ -30,7 +30,6 @@ const Chats = ({ fetchAgain }) => {
     fetchChats();
   }, [fetchAgain]);
 
-  console.log(chats);
   return (
     <section className="chats-section">
       <span className="chats-header">
@@ -39,7 +38,7 @@ const Chats = ({ fetchAgain }) => {
           New Group
         </button>
       </span>
-      <NewGroupModal modalOpen={modalOpen} />
+      <NewGroupModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <div className="single-chats">
         {chats ? (
           <div className="single-chat">
