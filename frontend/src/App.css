@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap");
 
 * {
   box-sizing: border-box;
@@ -9,7 +9,10 @@
 .App {
   min-height: 100vh;
   display: flex;
+  justify-content: center;
+  align-items: center;
   background: url("./assets/images/wallpaper.jpg");
   background-position: center;
   background-size: cover;
+  font-family: "Poppins", sans-serif;
 }

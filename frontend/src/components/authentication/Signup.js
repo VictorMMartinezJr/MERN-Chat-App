@@ -1,8 +1,10 @@
 import "./form.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Chat } from "../../context/ChatProvider";
 
 const Signup = () => {
+  const { setUser } = useContext(Chat);
   const [showPw, setShowPw] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [name, setName] = useState("");
@@ -70,11 +72,11 @@ const Signup = () => {
       const res = await fetch("/api/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser),
+        body: JSON.stringify({ name, email, password, avatar }),
       });
 
       const data = await res.json();
-      console.log(data);
+
       if (data.errors) {
         setNameError(data.errors.name);
         setEmailError(data.errors.email);
@@ -84,7 +86,8 @@ const Signup = () => {
         history.push("/chats");
       }
 
-      localStorage.setItem("userInfo", JSON.stringify(newUser));
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setUser(data);
       setLoading(false);
     } catch (error) {
       console.log("Error creating user");

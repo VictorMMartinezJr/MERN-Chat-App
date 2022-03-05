@@ -42,14 +42,15 @@
 }
 .nav-user-menu {
   position: absolute;
-  top: 110%;
+  top: 115%;
   left: 0;
   display: none;
   width: 100%;
   border-radius: 10px;
+  pointer-events: none;
 }
 .nav-user-menu p {
-  padding: 0.3rem 0;
+  padding: 0.3rem 0 0.3rem 0.3rem;
 }
 
 .nav-user-menu p:nth-child(1) {
@@ -57,4 +58,7 @@
 }
 .nav-user-menu.active {
   display: block;
+  pointer-events: all;
+  background-color: #fff;
+  z-index: 2;
 }

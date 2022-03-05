@@ -1,8 +1,10 @@
 import "./form.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Chat } from "../../context/ChatProvider";
 
 const Login = () => {
+  const { setUser } = useContext(Chat);
   const [showPw, setShowPw] = useState(false);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -24,7 +26,7 @@ const Login = () => {
       });
 
       const data = await res.json();
-      console.log(data);
+
       if (data.errors) {
         setEmailError(data.errors.email);
         setPasswordError(data.errors.password);
@@ -33,7 +35,8 @@ const Login = () => {
         history.push("/chats");
       }
 
-      localStorage.setItem("userInfo", JSON.stringify({ email, password }));
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setUser(data);
       setLoading(false);
     } catch (error) {
       console.log("Error creating user");

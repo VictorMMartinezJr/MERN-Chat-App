@@ -1,10 +1,46 @@
 .chats-section {
   height: calc(90vh - 6vh);
-  border: 2px solid blue;
+  background-color: #e4e4e4;
   width: 25%;
   display: flex;
   flex-direction: column;
 }
 .chats-title {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  margin: 0.5rem 0 0 0.5rem;
+}
+.chats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.new-chat-btn {
+  margin: 0.5rem 0.5rem 0 0;
+  padding: 0.4rem;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #707070;
+  background-color: #fff;
+  cursor: pointer;
+}
+.single-chats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.single-chat {
+  height: 70px;
+  width: 75%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #707070;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.single-chat p {
+  font-weight: 700;
 }

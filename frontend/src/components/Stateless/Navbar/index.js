@@ -1,13 +1,13 @@
 import "./Navbar.css";
-import { Chat } from "../../../context/ChatProvider";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsFillBellFill } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
+import { Chat } from "../../../context/ChatProvider";
 
 const Navbar = () => {
-  const [userMenuActive, setUserMenuActive] = useState(false);
   const { user } = useContext(Chat);
+  const [userMenuActive, setUserMenuActive] = useState(false);
   const history = useHistory();
 
   const logUserOut = () => {

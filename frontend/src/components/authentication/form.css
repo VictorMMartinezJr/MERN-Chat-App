@@ -6,6 +6,7 @@
   width: 100%;
   flex: 1;
   font-family: "Roboto", sans-serif;
+  color: #707070;
 }
 .form-content {
   width: 90%;
@@ -18,15 +19,12 @@
   margin: 1.2rem 0;
   position: relative;
 }
-.input-container label {
-  font-weight: 700;
-}
 .input-container input {
   width: 100%;
   padding: 0.8rem 0 0.8rem 5px;
   outline: none;
   border-radius: 10px;
-  border: 1px solid #d6d6d6;
+  border: 1px solid #707070;
 }
 .pw-input,
 .confirm-input {
@@ -52,20 +50,21 @@
   padding: 1rem 0 1rem 5px;
   border-radius: 10px;
   border: none;
-  background: linear-gradient(to right, #e94057, #fdbb2d);
+  background: #d82148;
   margin: 1rem 0;
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
+  color: #f2f2f2;
 }
 .submit-btn:hover {
-  background: linear-gradient(to right, #e90826, #ffae00);
+  background: #f7305b;
 }
 .guest-btn {
-  background: #b8b8b8;
+  background: #161853;
 }
 .guest-btn:hover {
-  background: #d6d6d6;
+  background: #1d206e;
 }
 /* Errors */
 .input-error {

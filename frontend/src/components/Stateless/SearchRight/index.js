@@ -10,6 +10,7 @@ const SearchRight = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchError, setSearchError] = useState();
 
+  // Search for users based on input value
   const handleSearch = async () => {
     if (!search) {
       setSearchError("Search empty");
@@ -22,7 +23,6 @@ const SearchRight = () => {
       });
       const data = await res.json();
       setSearchResults(data);
-      console.log(data);
     } catch (err) {
       console.log(err.message);
     }
@@ -45,13 +45,11 @@ const SearchRight = () => {
         <p className="search-error">{search ? "" : searchError}</p>
       </div>
       {searchResults &&
-        searchResults.map((searchedUser) => (
-          <SearchedUser
-            searchedUser={searchedUser}
-            key={searchedUser._id}
-            onClick={() => console.log("clicked")}
-          />
-        ))}
+        searchResults.map((searchedUser) => {
+          return (
+            <SearchedUser searchedUser={searchedUser} key={searchedUser._id} />
+          );
+        })}
     </section>
   );
 };

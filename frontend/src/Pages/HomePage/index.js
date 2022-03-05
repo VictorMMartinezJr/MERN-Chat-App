@@ -5,10 +5,13 @@ import Login from "../../components/authentication/Login";
 
 const Homepage = () => {
   const [loginActive, setLoginActive] = useState(true);
+
   return (
     <section className="home">
       <div className="login-form">
-        <h1 className="login-title">{loginActive ? "Login" : "Sign Up"}</h1>
+        <h1 className="login-title">
+          {loginActive ? "Welcome Back!" : "Sign Up"}
+        </h1>
         <div className="login-tabs">
           <p
             className={loginActive ? "active-tab" : ""}

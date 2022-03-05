@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const asyncHandler = require("express-async-handler");
-const { restart } = require("nodemon");
 
 const requireAuth = asyncHandler(async (req, res, next) => {
   let token;
@@ -19,7 +18,7 @@ const requireAuth = asyncHandler(async (req, res, next) => {
 
       next();
     } catch (err) {
-      restart.status(401);
+      res.status(401);
       throw new Error("Not authorized, no token");
     }
   }
