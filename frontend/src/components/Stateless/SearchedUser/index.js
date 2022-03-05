@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Chat } from "../../../context/ChatProvider";
 import "./SearchedUser.css";
 
-const SearchedUser = ({ searchedUser }) => {
+export const SearchedUser = ({ searchedUser }) => {
   const { user, chats, setChats } = useContext(Chat);
   // Capitalize first letter in user info
   const toUpperCase = (string) => {
@@ -45,4 +45,23 @@ const SearchedUser = ({ searchedUser }) => {
   );
 };
 
-export default SearchedUser;
+export const SearchedModalUser = ({ searchedUser, onClick }) => {
+  // Capitalize first letter in user info
+  const toUpperCase = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  return (
+    <div className="searched-user" onClick={onClick}>
+      <img
+        src={searchedUser.avatar}
+        alt="user-avatar"
+        className="searched-user-img"
+      />
+      <div className="searched-user-info">
+        <p className="searched-user-name">{toUpperCase(searchedUser.name)}</p>
+        <p className="searched-user-email">{toUpperCase(searchedUser.email)}</p>
+      </div>
+    </div>
+  );
+};

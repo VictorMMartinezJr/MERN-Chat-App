@@ -2,7 +2,7 @@ import "./SearchRight.css";
 import { BiSearch } from "react-icons/bi";
 import { useContext, useState } from "react";
 import { Chat } from "../../../context/ChatProvider";
-import SearchedUser from "../SearchedUser";
+import { SearchedUser } from "../SearchedUser";
 
 const SearchRight = () => {
   const { user } = useContext(Chat);

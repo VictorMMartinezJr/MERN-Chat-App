@@ -3,7 +3,8 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { useContext, useState } from "react";
 import { Chat } from "../../../context/ChatProvider";
 import axios from "axios";
-import SearchedUser from "../SearchedUser";
+import { SearchedModalUser } from "../SearchedUser";
+import AddedToGroupBadge from "../AddedToGroupBadge";
 
 const NewGroupModal = ({ modalOpen, setModalOpen }) => {
   const [groupChatName, setGroupChatName] = useState();
@@ -30,7 +31,21 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
     }
   };
   const handleSubmit = () => {};
-  const handleGroup = () => {};
+  const handleDelete = (selectedUser) => {
+    setSelectedUsers(
+      selectedUsers.filter((selected) => selected._id !== selectedUser._id)
+    );
+  };
+
+  const handleGroup = (userToAdd) => {
+    if (selectedUsers.includes(userToAdd)) {
+      return;
+    }
+
+    return setSelectedUsers([...selectedUsers, userToAdd]);
+  };
+
+  console.log(selectedUsers);
 
   return (
     <div
@@ -60,12 +75,23 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
             onChange={(e) => handleSearch(e.target.value)}
           />
         </form>
+        <div className="user-badges">
+          {selectedUsers.map((selectedUser) => {
+            return (
+              <AddedToGroupBadge
+                key={selectedUser._id}
+                selectedUser={selectedUser}
+                handleDelete={() => handleDelete(selectedUser)}
+              />
+            );
+          })}
+        </div>
         {searchResults?.slice(0, 4).map((user) => {
           return (
-            <SearchedUser
+            <SearchedModalUser
               key={user._id}
               searchedUser={user}
-              onClick={handleGroup}
+              onClick={() => handleGroup(user)}
             />
           );
         })}
