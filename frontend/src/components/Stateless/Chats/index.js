@@ -21,8 +21,9 @@ const Chats = ({ fetchAgain }) => {
     }
   };
 
+  // Make sure logged user sees recipients name, not his own
   const getSender = (loggedInUser, users) => {
-    return users[0]._id === loggedInUser._id ? users[1].name : users[0].name; // Make sure logged user sees recipients name, not his own
+    return users[0]._id === loggedInUser._id ? users[1].name : users[0].name;
   };
 
   useEffect(() => {
@@ -39,21 +40,25 @@ const Chats = ({ fetchAgain }) => {
         </button>
       </span>
       <NewGroupModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      <div className="single-chats">
+      <>
         {chats ? (
-          <div className="single-chat">
+          <div className="single-chats">
             {chats.map((chat) => {
               return (
-                <p key={chat._id}>
-                  {!chat.isGroupChat ? getSender(loggedUser, chat.users) : ""}
-                </p>
+                <div className="single-chat">
+                  <p key={chat._id}>
+                    {!chat.isGroupChat
+                      ? getSender(loggedUser, chat.users)
+                      : chat.chatName}
+                  </p>
+                </div>
               );
             })}
           </div>
         ) : (
           <p>No chats</p>
         )}
-      </div>
+      </>
     </section>
   );
 };

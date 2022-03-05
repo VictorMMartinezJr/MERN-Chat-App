@@ -30,7 +30,32 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
       console.log(err.message);
     }
   };
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    if (!groupChatName || !selectedUsers) {
+      console.log("Fill fields");
+    }
+
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${user.token}` },
+      };
+
+      const { data } = await axios.post(
+        "/api/chat/group",
+        {
+          chatName: groupChatName,
+          users: JSON.stringify(selectedUsers.map((user) => user._id)),
+        },
+        config
+      );
+
+      setChats([data, ...chats]);
+      setModalOpen(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleDelete = (selectedUser) => {
     setSelectedUsers(
       selectedUsers.filter((selected) => selected._id !== selectedUser._id)
@@ -95,7 +120,9 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
             />
           );
         })}
-        <button className="modal-submit-btn" onClick={handleSubmit}></button>
+        <button className="modal-submit-btn" onClick={handleSubmit}>
+          Submit
+        </button>
       </div>
     </div>
   );

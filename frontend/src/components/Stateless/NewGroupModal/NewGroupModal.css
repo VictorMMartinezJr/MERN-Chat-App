@@ -32,9 +32,11 @@
   margin: 0.5rem;
   font-size: 1.7rem;
   cursor: pointer;
+  color: #d82148;
 }
 .modal-header {
   font-size: 1.8rem;
+  color: #d82148;
 }
 .modal-form {
   display: flex;
@@ -55,4 +57,16 @@
   display: flex;
   flex-wrap: wrap;
   width: 90%;
+}
+.modal-submit-btn {
+  width: 90%;
+  padding: 1rem 0 1rem 5px;
+  border-radius: 10px;
+  border: none;
+  background: #d82148;
+  margin: 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #f2f2f2;
 }
