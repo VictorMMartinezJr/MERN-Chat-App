@@ -7,7 +7,8 @@ import NewGroupModal from "../NewGroupModal";
 const Chats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
   const [modalOpen, setModalOpen] = useState(false);
-  const { user, chats, setChats } = useContext(Chat);
+  const { user, chats, setChats, selectedChat, setSelectedChat } =
+    useContext(Chat);
 
   const fetchChats = async () => {
     const config = {
@@ -45,8 +46,18 @@ const Chats = ({ fetchAgain }) => {
           <div className="single-chats">
             {chats.map((chat) => {
               return (
-                <div className="single-chat">
-                  <p key={chat._id}>
+                <div
+                  key={chat._id}
+                  className={
+                    selectedChat._id === chat._id
+                      ? "single-chat active-single-chat"
+                      : "single-chat"
+                  }
+                  onClick={() => {
+                    setSelectedChat(chat);
+                  }}
+                >
+                  <p>
                     {!chat.isGroupChat
                       ? getSender(loggedUser, chat.users)
                       : chat.chatName}

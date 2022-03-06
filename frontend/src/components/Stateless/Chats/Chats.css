@@ -41,9 +41,15 @@
   box-shadow: 0 0 10px #707070;
   margin: 1rem 0;
   cursor: pointer;
-  border: 2px solid blue;
 }
-
+.single-chat:hover {
+  background: #d82148;
+  color: #fff;
+}
+.active-single-chat {
+  background: #d82148;
+  color: #fff;
+}
 .single-chat p {
   font-weight: 700;
 }

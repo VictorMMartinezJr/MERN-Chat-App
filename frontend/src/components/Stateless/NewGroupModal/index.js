@@ -70,8 +70,6 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
     return setSelectedUsers([...selectedUsers, userToAdd]);
   };
 
-  console.log(selectedUsers);
-
   return (
     <div
       className={
