@@ -43,8 +43,8 @@ const UpdateGCModal = ({
     } catch (err) {
       console.log(err.message);
     }
-
     setGroupChatName("");
+    console.log(groupChatName);
   };
 
   const handleSearch = async (query) => {
@@ -132,7 +132,12 @@ const UpdateGCModal = ({
       <div className="update-group-modal">
         <AiFillCloseCircle
           className="close-modal-btn"
-          onClick={() => setOpenGCModal(false)}
+          onClick={() => {
+            setOpenGCModal(false);
+            setGroupChatName("");
+            setSearch("");
+            setSearchResults([]);
+          }}
         />
         <h1 className="update-modal-header">{selectedChat.chatName}</h1>
         <div className="user-badges">
@@ -151,6 +156,7 @@ const UpdateGCModal = ({
               type="text"
               placeholder="Rename Group Chat"
               className="rename-gc-input"
+              value={groupChatName}
               onChange={(e) => setGroupChatName(e.target.value)}
             />
             <button className="update-group-btn" onClick={renameGC}>
@@ -162,6 +168,7 @@ const UpdateGCModal = ({
               type="text"
               placeholder="Add Users To Group"
               className="rename-gc-input"
+              value={search}
               onChange={(e) => handleSearch(e.target.value)}
             />
           </div>
