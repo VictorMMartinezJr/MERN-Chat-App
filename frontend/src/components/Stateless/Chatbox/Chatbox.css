@@ -1,7 +1,8 @@
 .chatbox {
   height: calc(90vh - 6vh);
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  border-radius: 10px;
 }

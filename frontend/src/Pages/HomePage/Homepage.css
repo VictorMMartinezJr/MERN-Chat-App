@@ -16,6 +16,7 @@
 }
 .login-title {
   margin: 1rem 0;
+  color: #363636;
 }
 .login-tabs {
   display: flex;
@@ -28,7 +29,8 @@
   font-weight: 700;
   margin-bottom: 1rem;
   cursor: pointer;
+  color: #363636;
 }
 .active-tab {
-  border-bottom: 4px solid #d82148;
+  border-bottom: 4px solid #0575e6;
 }

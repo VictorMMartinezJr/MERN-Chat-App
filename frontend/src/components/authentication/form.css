@@ -50,7 +50,7 @@
   padding: 1rem 0 1rem 5px;
   border-radius: 10px;
   border: none;
-  background: #d82148;
+  background: #0575e6;
   margin: 1rem 0;
   font-size: 1.2rem;
   font-weight: 700;
@@ -58,13 +58,15 @@
   color: #f2f2f2;
 }
 .submit-btn:hover {
-  background: #f7305b;
+  background: #026cd6;
 }
 .guest-btn {
-  background: #161853;
+  background: #cecdcd;
+  color: #000;
 }
 .guest-btn:hover {
-  background: #1d206e;
+  background: #0575e6;
+  color: #fff;
 }
 /* Errors */
 .input-error {

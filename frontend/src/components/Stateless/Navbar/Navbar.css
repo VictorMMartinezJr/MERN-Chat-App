@@ -4,6 +4,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
 }
 .navbar-title {
   margin-left: 0.5rem;
@@ -18,7 +20,7 @@
 .bell-icon {
   font-size: 1.5rem;
   margin-right: 1rem;
-  color: #d82148;
+  color: #363636;
 }
 .nav-user {
   height: 80%;

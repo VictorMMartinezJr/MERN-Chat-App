@@ -19,7 +19,7 @@
   margin-left: 0.5rem;
 }
 .update-gc-btn {
-  margin-right: 0.5rem;
+  margin: 0.5rem 0.5rem 0 0;
   font-size: 1.8rem;
   border: none;
   border-radius: 5px;
@@ -27,11 +27,31 @@
   background-color: #fff;
   cursor: pointer;
 }
+.update-gc-btn:hover {
+  background: #0575e6;
+  color: #fff;
+}
 .messages-container {
   display: flex;
-  width: 98%;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-height: 93%;
+  width: 99%;
   flex: 1;
-  background-color: #000;
-  margin: 0.5rem 0;
+  background: #fff;
+  margin: 0.5rem;
   border-radius: 10px;
+}
+.messages-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.messages-input {
+  width: 100%;
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  margin-top: 0.5rem;
+  background: #e4e3e3;
 }

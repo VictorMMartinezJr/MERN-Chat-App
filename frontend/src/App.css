@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("./assets/images/wallpaper.jpg");
+  background: linear-gradient(to right, #0575e6, #021b79);
   background-position: center;
   background-size: cover;
   font-family: "Poppins", sans-serif;

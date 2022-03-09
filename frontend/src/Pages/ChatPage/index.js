@@ -1,5 +1,5 @@
 import "./ChatPage.css";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Navbar from "../../components/Stateless/Navbar";
 import MyChats from "../../components/Stateless/Chats";
 import Chatbox from "../../components/Stateless/Chatbox";
@@ -15,9 +15,13 @@ const Chatpage = () => {
     <section className="chat-page">
       <Navbar />
       <div className="chat-content">
-        {user && <Chats fetchAgain={fetchAgain} />}
-        <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
-        <SearchRight />
+        {user && (
+          <Chats setFetchAgain={setFetchAgain} fetchAgain={fetchAgain} />
+        )}
+        {user && (
+          <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+        )}
+        {user && <SearchRight />}
       </div>
     </section>
   );

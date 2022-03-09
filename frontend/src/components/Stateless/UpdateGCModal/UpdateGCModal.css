@@ -27,7 +27,7 @@
 }
 .update-modal-header {
   font-size: 1.8rem;
-  color: #d82148;
+  color: #363636;
 }
 
 .gc-modal-form {
@@ -55,10 +55,13 @@
 .update-group-btn {
   padding: 0.8rem;
   border: none;
-  background-color: #d82148;
+  background: #0575e6;
   color: #fff;
   border-radius: 10px;
   cursor: pointer;
+}
+.update-group-btn:hover {
+  background: #026cd6;
 }
 .leave-gc-btn {
   width: 90%;

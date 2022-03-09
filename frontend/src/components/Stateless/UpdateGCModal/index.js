@@ -11,6 +11,7 @@ const UpdateGCModal = ({
   setFetchAgain,
   openGCModal,
   setOpenGCModal,
+  fetchAllMessages,
 }) => {
   const { selectedChat, setSelectedChat, user } = useContext(Chat);
   const [groupChatName, setGroupChatName] = useState("");
@@ -86,6 +87,7 @@ const UpdateGCModal = ({
 
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);
+      fetchAllMessages();
     } catch (err) {
       console.log(err.message);
     }

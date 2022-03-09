@@ -3,14 +3,19 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Chat } from "../../../context/ChatProvider";
 import NewGroupModal from "../NewGroupModal";
+import { getSender } from "../ChatLogic";
 
-const Chats = ({ fetchAgain }) => {
+const Chats = ({ setFetchAgain, fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
   const [modalOpen, setModalOpen] = useState(false);
   const { user, chats, setChats, selectedChat, setSelectedChat } =
     useContext(Chat);
 
+  console.log(chats);
+
   const fetchChats = async () => {
+    if (!user) setFetchAgain(!fetchAgain);
+
     const config = {
       headers: { Authorization: `Bearer ${user.token}` },
     };
@@ -22,13 +27,11 @@ const Chats = ({ fetchAgain }) => {
     }
   };
 
-  // Make sure logged user sees recipients name, not his own
-  const getSender = (loggedInUser, users) => {
-    return users[0]._id === loggedInUser._id ? users[1].name : users[0].name;
-  };
-
   useEffect(() => {
     setLoggedUser(user);
+  }, [fetchAgain]);
+
+  useEffect(() => {
     fetchChats();
   }, [fetchAgain]);
 
@@ -58,7 +61,7 @@ const Chats = ({ fetchAgain }) => {
                   }}
                 >
                   <p>
-                    {!chat.isGroupChat
+                    {user && !chat.isGroupChat
                       ? getSender(loggedUser, chat.users)
                       : chat.chatName}
                   </p>
