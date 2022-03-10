@@ -1,13 +1,14 @@
 import "./SingleChat.css";
 import { useContext, useEffect, useState } from "react";
 import { Chat } from "../../../context/ChatProvider";
-import { HiUserGroup } from "react-icons/hi";
+import { FaUserEdit } from "react-icons/fa";
 import UpdateGCModal from "../UpdateGCModal";
 import ScrollableChat from "../ScrollableChat";
 import axios from "axios";
+import { getSender } from "../ChatLogic";
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-  const { user, selectedChat, setSelectedChat } = useContext(Chat);
+  const { user, selectedChat } = useContext(Chat);
   const [openGCModal, setOpenGCModal] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState();
@@ -66,8 +67,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
-
-    //Typing logic indicator
   };
 
   return (
@@ -78,13 +77,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             {selectedChat.isGroupChat ? (
               <h1 className="chat-title">{selectedChat.chatName}</h1>
             ) : (
-              <p>Not a group chat</p>
+              <h1>{getSender(user, selectedChat.users)}</h1>
             )}
           </>
         ) : (
           <p>No Chat Selected</p>
         )}
-        <HiUserGroup
+        <FaUserEdit
           className="update-gc-btn"
           onClick={() => setOpenGCModal(true)}
         />

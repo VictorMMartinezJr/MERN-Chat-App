@@ -18,10 +18,8 @@ const Chatpage = () => {
         {user && (
           <Chats setFetchAgain={setFetchAgain} fetchAgain={fetchAgain} />
         )}
-        {user && (
-          <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
-        )}
-        {user && <SearchRight />}
+        <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+        <SearchRight />
       </div>
     </section>
   );

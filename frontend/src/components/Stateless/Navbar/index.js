@@ -6,12 +6,16 @@ import { useHistory } from "react-router-dom";
 import { Chat } from "../../../context/ChatProvider";
 
 const Navbar = () => {
-  const { user } = useContext(Chat);
+  const { user, setUser, setChats, setSelectedChat } = useContext(Chat);
   const [userMenuActive, setUserMenuActive] = useState(false);
   const history = useHistory();
 
   const logUserOut = () => {
-    localStorage.clear(); // Clear all keys and values in LS
+    // Clear global states and local storage
+    localStorage.clear();
+    setUser({});
+    setChats([]);
+    setSelectedChat("");
     history.push("/");
   };
 
@@ -19,7 +23,6 @@ const Navbar = () => {
     <nav className="navbar">
       <h1 className="navbar-title">Chit Chat</h1>
       <div className="right-nav">
-        <BsFillBellFill className="bell-icon" />
         <div
           className="nav-user"
           onClick={() => setUserMenuActive(!userMenuActive)}
@@ -36,7 +39,7 @@ const Navbar = () => {
             }
           >
             <p>My Profile</p>
-            <p onClick={logUserOut}>Log out</p>
+            <p onClick={() => logUserOut()}>Log out</p>
           </div>
         </div>
       </div>

@@ -40,6 +40,7 @@ const Login = () => {
       setLoading(false);
     } catch (error) {
       console.log("Error creating user");
+      setUser({});
       setLoading(false);
       return;
     }
@@ -59,7 +60,6 @@ const Login = () => {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              console.log(email);
             }}
           />
           <span className="input-error">{emailError}</span>

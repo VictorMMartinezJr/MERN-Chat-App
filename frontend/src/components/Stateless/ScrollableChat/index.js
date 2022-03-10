@@ -30,7 +30,9 @@ const ScrollableChat = ({ messages }) => {
               className="message"
               style={{
                 background: `${
-                  message.sender._id === user._id ? "#0575e6" : "#e4e3e3"
+                  message.sender._id === user._id
+                    ? "linear-gradient(to right, #00c6ff,#0072ff)"
+                    : "#e4e3e3"
                 }`,
                 color: messageTextColor(messages, message, i, user._id),
                 marginTop: isSameUser(messages, message, i, user._id) ? 3 : 10,
