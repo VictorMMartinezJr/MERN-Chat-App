@@ -7,7 +7,7 @@ import { SearchedModalUser } from "../SearchedUser";
 import AddedToGroupBadge from "../AddedToGroupBadge";
 
 const NewGroupModal = ({ modalOpen, setModalOpen }) => {
-  const [groupChatName, setGroupChatName] = useState();
+  const [groupChatName, setGroupChatName] = useState("");
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -36,17 +36,17 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
   const handleSubmit = async () => {
     if (!groupChatName || !selectedUsers) {
       setAddToGroupError("");
-      setFillInputsError("Please enter all fields");
+      setFillInputsError("Please enter all fields"); // Error if any input is empty
       return;
     }
 
     if (groupChatName.length > 15) {
-      setFillInputsError("Max chat name length is 15");
+      setFillInputsError("Max chat name length is 15"); // Error if password is too long
       return;
     }
 
     if (selectedUsers.length < 2) {
-      setAddToGroupError("At least 2 users must be added");
+      setAddToGroupError("At least 2 users must be added"); // Error if user list is too short to form group
       return;
     }
 
@@ -98,7 +98,13 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
       <div className="new-group-modal">
         <AiFillCloseCircle
           className="close-modal-btn"
-          onClick={() => setModalOpen(false)}
+          onClick={() => {
+            setModalOpen(false);
+            setSearch("");
+            setGroupChatName("");
+            setAddToGroupError("");
+            setFillInputsError("");
+          }}
         />
         <h1 className="modal-header">Create New Group Chat</h1>
         <form className="modal-form">
@@ -106,6 +112,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
             <input
               type="text"
               placeholder="Chat Name"
+              value={groupChatName}
               onChange={(e) => setGroupChatName(e.target.value)}
               className="modal-input"
             />
@@ -115,6 +122,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
               type="text"
               placeholder="Add Users To Group"
               className="modal-input"
+              value={search}
               onFocus={() => {
                 setAddToGroupError("");
                 setFillInputsError("");
