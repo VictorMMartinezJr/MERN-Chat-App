@@ -13,15 +13,19 @@ const SearchRight = () => {
   // Search for users based on input value
   const handleSearch = async () => {
     if (!search) {
-      setSearchError("Search empty");
+      setSearchError("Search empty"); // Set Error if search input is empty
       return;
     }
     try {
       const res = await fetch(`/api/user?search=${search}`, {
         method: "GET",
-        headers: { Authorization: `Bearer ${user.token}` }, // Use logged in user's jwt
+        headers: { Authorization: `Bearer ${user.token}` },
       });
       const data = await res.json();
+
+      if (data.length === 0) {
+        setSearchError("User not found"); // Set Error if user not found in database
+      }
       setSearchResults(data);
     } catch (err) {
       console.log(err.message);
@@ -36,13 +40,14 @@ const SearchRight = () => {
           type="text"
           placeholder="Search User"
           value={search}
+          onFocus={() => setSearchError("")} // Remove error when user starts typing again
           onChange={(e) => setSearch(e.target.value)}
         />
         <button onClick={handleSearch} className="search-btn">
           Go
         </button>
         <BiSearch className="search-icon" />
-        <p className="search-error">{search ? "" : searchError}</p>
+        <p className="search-error">{searchError}</p>
       </div>
       {searchResults &&
         searchResults.map((searchedUser) => {
