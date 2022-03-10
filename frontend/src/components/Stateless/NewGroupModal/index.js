@@ -11,11 +11,14 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [addToGroupError, setAddToGroupError] = useState("");
+  const [fillInputsError, setFillInputsError] = useState("");
   const { user, chats, setChats } = useContext(Chat);
 
   const handleSearch = async (query) => {
     setSearch(query);
     if (!query) {
+      setSearchResults([]);
       return;
     }
 
@@ -32,7 +35,19 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
   };
   const handleSubmit = async () => {
     if (!groupChatName || !selectedUsers) {
-      console.log("Fill fields");
+      setAddToGroupError("");
+      setFillInputsError("Please enter all fields");
+      return;
+    }
+
+    if (groupChatName.length > 15) {
+      setFillInputsError("Max chat name length is 15");
+      return;
+    }
+
+    if (selectedUsers.length < 2) {
+      setAddToGroupError("At least 2 users must be added");
+      return;
     }
 
     try {
@@ -64,6 +79,8 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
 
   const handleGroup = (userToAdd) => {
     if (selectedUsers.includes(userToAdd)) {
+      setFillInputsError("");
+      setAddToGroupError("User already being added");
       return;
     }
 
@@ -85,18 +102,28 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
         />
         <h1 className="modal-header">Create New Group Chat</h1>
         <form className="modal-form">
-          <input
-            type="text"
-            placeholder="Chat Name"
-            onChange={(e) => setGroupChatName(e.target.value)}
-            className="modal-input"
-          />
-          <input
-            type="text"
-            placeholder="Add Users To Group"
-            className="modal-input"
-            onChange={(e) => handleSearch(e.target.value)}
-          />
+          <div className="new-gc-name-input-container">
+            <input
+              type="text"
+              placeholder="Chat Name"
+              onChange={(e) => setGroupChatName(e.target.value)}
+              className="modal-input"
+            />
+          </div>
+          <div className="new-gc-addusers-container">
+            <input
+              type="text"
+              placeholder="Add Users To Group"
+              className="modal-input"
+              onFocus={() => {
+                setAddToGroupError("");
+                setFillInputsError("");
+              }}
+              onChange={(e) => handleSearch(e.target.value)}
+            />
+            <p className="add-to-gc-error">{addToGroupError}</p>
+            <p className="add-to-gc-error">{fillInputsError}</p>
+          </div>
         </form>
         <div className="user-badges">
           {selectedUsers.map((selectedUser) => {
