@@ -17,11 +17,19 @@ const UpdateGCModal = ({
   const [groupChatName, setGroupChatName] = useState("");
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [addToGroupError, setAddToGroupError] = useState("");
+  const [renameGroupError, setRenameGroupError] = useState("");
 
   const renameGC = async (e) => {
     e.preventDefault();
+
     if (!groupChatName) {
-      console.log("No Inpout");
+      setRenameGroupError("Input empty");
+      return;
+    }
+
+    if (groupChatName.length > 15) {
+      setRenameGroupError("Max chat name length is 15");
       return;
     }
 
@@ -45,7 +53,6 @@ const UpdateGCModal = ({
       console.log(err.message);
     }
     setGroupChatName("");
-    console.log(groupChatName);
   };
 
   const handleSearch = async (query) => {
@@ -68,7 +75,8 @@ const UpdateGCModal = ({
 
   const removeUser = async (user1) => {
     if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
-      console.log("Only admins can remove users");
+      setAddToGroupError("Only admins can remove users");
+      return;
     }
 
     try {
@@ -95,11 +103,13 @@ const UpdateGCModal = ({
 
   const handleGroup = async (user1) => {
     if (selectedChat.users.find((u) => u._id === user1._id)) {
-      console.log("User Already In GC");
+      setAddToGroupError("User already in groupchat");
+      return;
     }
 
     if (selectedChat.groupAdmin._id !== user._id) {
-      console.log("Only Admins can add users");
+      setAddToGroupError("Only Admins can add users");
+      return;
     }
 
     try {
@@ -139,6 +149,8 @@ const UpdateGCModal = ({
             setGroupChatName("");
             setSearch("");
             setSearchResults([]);
+            setRenameGroupError("");
+            setAddToGroupError("");
           }}
         />
         <h1 className="update-modal-header">{selectedChat.chatName}</h1>
@@ -159,8 +171,10 @@ const UpdateGCModal = ({
               placeholder="Rename Group Chat"
               className="rename-gc-input"
               value={groupChatName}
+              onFocus={() => setRenameGroupError("")} // Remove error when user starts typing again
               onChange={(e) => setGroupChatName(e.target.value)}
             />
+            <p className="rename-gc-error">{renameGroupError}</p>
             <button className="update-group-btn" onClick={renameGC}>
               Update
             </button>
@@ -173,6 +187,7 @@ const UpdateGCModal = ({
               value={search}
               onChange={(e) => handleSearch(e.target.value)}
             />
+            <p className="add-to-gc-error">{addToGroupError}</p>
           </div>
         </form>
         {searchResults?.slice(0, 4).map((user) => {

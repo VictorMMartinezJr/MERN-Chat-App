@@ -1,7 +1,10 @@
+.update-gc-modal-container {
+  display: none;
+}
 .update-gc-modal-container.modal-active {
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7);
   position: absolute;
   left: 50%;
   top: 50%;
@@ -10,9 +13,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.update-gc-modal-container {
-  display: none;
 }
 .update-group-modal {
   min-height: 400px;
@@ -27,7 +27,6 @@
 }
 .update-modal-header {
   font-size: 1.8rem;
-  color: #363636;
 }
 
 .gc-modal-form {
@@ -43,6 +42,10 @@
   justify-content: space-between;
   align-items: center;
   width: 90%;
+  position: relative;
+}
+.gc-input-container:nth-child(2) {
+  position: relative;
 }
 .rename-gc-input {
   flex: 1;
@@ -55,13 +58,13 @@
 .update-group-btn {
   padding: 0.8rem;
   border: none;
-  background: #0575e6;
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
   color: #fff;
   border-radius: 10px;
   cursor: pointer;
 }
 .update-group-btn:hover {
-  background: #026cd6;
+  background: linear-gradient(to left, #8e2de2, #4a00e0);
 }
 .leave-gc-btn {
   width: 90%;
@@ -72,5 +75,15 @@
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
-  color: #f2f2f2;
+  color: #fff;
+}
+.add-to-gc-error,
+.rename-gc-error {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translate(-50%);
+  color: red;
+  font-size: 0.8rem;
+  font-weight: 700;
 }

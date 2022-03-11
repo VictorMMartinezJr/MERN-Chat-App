@@ -32,11 +32,9 @@
   margin: 0.5rem;
   font-size: 1.7rem;
   cursor: pointer;
-  color: #363636;
 }
 .modal-header {
   font-size: 1.8rem;
-  color: #363636;
   margin-bottom: 1rem;
 }
 .modal-form {
