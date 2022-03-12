@@ -1,4 +1,4 @@
-.single-chats-container {
+.chatbox-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,30 +6,56 @@
   height: 100%;
   width: 100%;
 }
-.single-chat-header {
+.no-chat-header {
+  margin-left: 0.5rem;
+  font-weight: 700;
+}
+.chatbox-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 50px;
   width: 100%;
 }
-.chat-title {
+.chatbox-groupchat-title {
   font-size: 1.5rem;
   font-weight: bold;
   align-self: start;
   margin-left: 0.5rem;
+}
+.single-chat-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+.single-chat-back-arrow {
+  font-size: 1.8rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+.chat-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.single-chat-header img {
+  height: 30px;
+  border-radius: 20px;
+  margin-right: 0.5rem;
 }
 .update-gc-btn {
   margin: 0.5rem 0.5rem 0 0;
   font-size: 1.8rem;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 0 5px #707070;
-  background-color: #fff;
   cursor: pointer;
 }
-.update-gc-btn:hover {
-  background: #0575e6;
-  color: #fff;
+.search-user-icon {
+  margin: 0.5rem 0.5rem 0 0;
+  font-size: 1.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .messages-container {
   display: flex;
@@ -41,6 +67,7 @@
   background: #fff;
   margin: 0.5rem;
   border-radius: 10px;
+  flex: 1;
 }
 .messages-form {
   display: flex;
@@ -54,4 +81,14 @@
   border: none;
   margin-top: 0.5rem;
   background: #e4e3e3;
+}
+@media screen and (max-width: 1280px) {
+  .single-chat-header img {
+    height: 25px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .single-chat-header img {
+    height: 30px;
+  }
 }

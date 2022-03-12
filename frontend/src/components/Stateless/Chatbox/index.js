@@ -4,11 +4,23 @@ import { Chat } from "../../../context/ChatProvider";
 import SingleChat from "../SingleChat";
 
 const Chatbox = ({ fetchAgain, setFetchAgain }) => {
-  const { SelectedChat } = useContext(Chat);
+  const { selectedChat, iPadSearch } = useContext(Chat);
+  const iPadScreen = window.matchMedia("(max-width: 1024px)");
+
   return (
-    <section className="chatbox">
-      <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
-    </section>
+    <>
+      {!iPadScreen.matches ? (
+        <section className="chatbox">
+          <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+        </section>
+      ) : (
+        <section
+          className={selectedChat && !iPadSearch ? "chatbox" : "chatbox-ipad"}
+        >
+          <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+        </section>
+      )}
+    </>
   );
 };
 

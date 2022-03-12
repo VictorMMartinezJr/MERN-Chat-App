@@ -2,16 +2,21 @@ import "./SingleChat.css";
 import { useContext, useEffect, useState } from "react";
 import { Chat } from "../../../context/ChatProvider";
 import { FaUserEdit } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
+import { IoMdArrowBack } from "react-icons/io";
 import UpdateGCModal from "../UpdateGCModal";
 import ScrollableChat from "../ScrollableChat";
 import axios from "axios";
-import { getSender } from "../ChatLogic";
+import { getSender, getSenderAvatar } from "../ChatLogic";
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-  const { user, selectedChat } = useContext(Chat);
+  const { user, selectedChat, setSelectedChat, setiPadSearch } =
+    useContext(Chat);
   const [openGCModal, setOpenGCModal] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState();
+
+  const iPadScreen = window.matchMedia("(max-width: 1024px)");
 
   const fetchAllMessages = async () => {
     if (!selectedChat) return;
@@ -31,6 +36,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     } catch (err) {
       console.log(err.message);
     }
+  };
+
+  // Capitalize first letter in chat name
+  const toUpperCase = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
   useEffect(() => {
@@ -58,7 +68,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           config
         );
 
-        console.log(data);
         setMessages([...messages, data]);
       } catch (err) {
         console.log(err.message);
@@ -70,23 +79,51 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   return (
-    <section className="single-chats-container">
-      <div className="single-chat-header">
+    <section className="chatbox-container">
+      <div className="chatbox-header">
+        {selectedChat && iPadScreen.matches && (
+          <IoMdArrowBack
+            className="single-chat-back-arrow"
+            onClick={() => setSelectedChat("")}
+          />
+        )}
         {selectedChat ? (
           <>
             {selectedChat.isGroupChat ? (
-              <h1 className="chat-title">{selectedChat.chatName}</h1>
+              <h1 className="chatbox-groupchat-title">
+                {selectedChat.chatName}
+              </h1>
             ) : (
-              <h1>{getSender(user, selectedChat.users)}</h1>
+              <div className="single-chat-header">
+                <img
+                  src={getSenderAvatar(user, selectedChat.users)}
+                  alt="chat-user-avatar"
+                />
+                <h1 className="chat-title">
+                  {toUpperCase(getSender(user, selectedChat.users))}
+                </h1>
+              </div>
             )}
           </>
         ) : (
-          <p>No Chat Selected</p>
+          <p className="no-chat-header">Select a chat to start chatting!</p>
         )}
-        <FaUserEdit
-          className="update-gc-btn"
-          onClick={() => setOpenGCModal(true)}
-        />
+        <span className="single-chat-icons">
+          {selectedChat && (
+            <FaUserEdit
+              className="update-gc-btn"
+              onClick={() => setOpenGCModal(true)}
+            />
+          )}
+          {selectedChat && iPadScreen.matches && (
+            <FiSearch
+              className="search-user-icon"
+              onClick={() => {
+                setiPadSearch(true);
+              }}
+            />
+          )}
+        </span>
         <UpdateGCModal
           fetchAgain={fetchAgain}
           setFetchAgain={setFetchAgain}

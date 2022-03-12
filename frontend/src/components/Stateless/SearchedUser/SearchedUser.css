@@ -10,6 +10,10 @@
   margin: 0.5rem 0;
   cursor: pointer;
 }
+.searched-user-info {
+  display: flex;
+  flex-direction: column;
+}
 .searched-user-img {
   height: 45px;
   border-radius: 10px;
@@ -17,5 +21,16 @@
 .searched-user-name,
 .searched-user-email {
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 1rem;
+}
+@media screen and (max-width: 1280px) {
+  .searched-user {
+    height: auto;
+    flex-direction: column;
+    text-align: center;
+  }
+  .searched-user-img {
+    height: 30px;
+    margin: 0.2rem;
+  }
 }

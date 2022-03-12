@@ -3,13 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Chat } from "../../../context/ChatProvider";
 import NewGroupModal from "../NewGroupModal";
-import { getSender } from "../ChatLogic";
+import { getSender, getSenderAvatar } from "../ChatLogic";
 
 const Chats = ({ setFetchAgain, fetchAgain }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [loggedUser, setLoggedUser] = useState({});
-  const { user, chats, setChats, selectedChat, setSelectedChat } =
+  const { user, chats, setChats, selectedChat, setSelectedChat, iPadSearch } =
     useContext(Chat);
+
+  const iPadScreen = window.matchMedia("(max-width: 1024px)");
 
   const fetchChats = async () => {
     if (!user) {
@@ -22,11 +24,15 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
     };
     try {
       const { data } = await axios.get("/api/chat", config);
-      console.log("data: ", data);
       setChats(data);
     } catch (err) {
       console.log(err.message);
     }
+  };
+
+  // Capitalize first letter in chat name
+  const toUpperCase = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
   // Fetch user again if empty on first render
@@ -39,11 +45,17 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
   }, [loggedUser]);
 
   return (
-    <section className="chats-section">
+    <section
+      className={
+        (selectedChat && iPadScreen.matches) || (selectedChat && iPadSearch)
+          ? "chats-section-ipad"
+          : "chats-section"
+      }
+    >
       <span className="chats-header">
-        <h1 className="chats-title">My Chats</h1>
+        <h1 className="chats-title">Chats</h1>
         <button className="new-chat-btn" onClick={() => setModalOpen(true)}>
-          NEW GROUP
+          New Group
         </button>
       </span>
       <NewGroupModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
@@ -65,7 +77,7 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
                 >
                   <p>
                     {user && !chat.isGroupChat
-                      ? getSender(user, chat.users)
+                      ? toUpperCase(getSender(user, chat.users))
                       : chat.chatName}
                   </p>
                 </div>

@@ -5,10 +5,12 @@ import { Chat } from "../../../context/ChatProvider";
 import { SearchedUser } from "../SearchedUser";
 
 const SearchRight = () => {
-  const { user } = useContext(Chat);
+  const { user, iPadSearch, setiPadSearch } = useContext(Chat);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchError, setSearchError] = useState();
+
+  const iPadScreen = window.matchMedia("(max-width: 1024px)");
 
   // Search for users based on input value
   const handleSearch = async () => {
@@ -28,34 +30,73 @@ const SearchRight = () => {
       }
       setSearchResults(data);
     } catch (err) {
-      console.log(err.message);
+      setSearchError(err.message);
     }
   };
 
+  console.log(iPadSearch);
   return (
-    <section className="search-right">
-      <div className="search-input-content">
-        <input
-          className="search-input"
-          type="text"
-          placeholder="Search User"
-          value={search}
-          onFocus={() => setSearchError("")} // Remove error when user starts typing again
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button onClick={handleSearch} className="search-btn">
-          Go
-        </button>
-        <BiSearch className="search-icon" />
-        <p className="search-error">{searchError}</p>
-      </div>
-      {searchResults &&
-        searchResults.map((searchedUser) => {
-          return (
-            <SearchedUser searchedUser={searchedUser} key={searchedUser._id} />
-          );
-        })}
-    </section>
+    <>
+      {!iPadScreen.matches ? (
+        <section className="search-right">
+          <div className="search-input-content">
+            <span className="search-input-span">
+              <input
+                className="search-input"
+                type="text"
+                placeholder="Search for a user"
+                value={search}
+                onFocus={() => setSearchError("")} // Remove error when user starts typing again
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <BiSearch className="search-icon" />
+              <p className="search-error">{searchError}</p>
+            </span>
+            <button onClick={handleSearch} className="search-btn">
+              Search
+            </button>
+          </div>
+          {searchResults &&
+            searchResults.map((searchedUser) => {
+              return (
+                <SearchedUser
+                  searchedUser={searchedUser}
+                  key={searchedUser._id}
+                />
+              );
+            })}
+        </section>
+      ) : (
+        <section className={iPadSearch ? "search-right" : "search-right-ipad"}>
+          <div className="search-input-content">
+            <span className="search-input-span">
+              <input
+                className="search-input"
+                type="text"
+                placeholder="Search for a user"
+                value={search}
+                onFocus={() => setSearchError("")} // Remove error when user starts typing again
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <BiSearch className="search-icon" />
+              <p className="search-error">{searchError}</p>
+            </span>
+            <button onClick={handleSearch} className="search-btn">
+              Search
+            </button>
+          </div>
+          {searchResults &&
+            searchResults.map((searchedUser) => {
+              return (
+                <SearchedUser
+                  searchedUser={searchedUser}
+                  key={searchedUser._id}
+                />
+              );
+            })}
+        </section>
+      )}
+    </>
   );
 };
 

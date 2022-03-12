@@ -1,13 +1,15 @@
 import "./Navbar.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsFillBellFill } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 import { Chat } from "../../../context/ChatProvider";
+import MyProfileModal from "../Modals/MyProfileModal";
 
 const Navbar = () => {
   const { user, setUser, setChats, setSelectedChat } = useContext(Chat);
   const [userMenuActive, setUserMenuActive] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
   const history = useHistory();
 
   const logUserOut = () => {
@@ -38,11 +40,17 @@ const Navbar = () => {
               userMenuActive ? "nav-user-menu active" : "nav-user-menu"
             }
           >
-            <p>My Profile</p>
+            <p onClick={() => setOpenProfile(true)}>My Profile</p>
             <p onClick={() => logUserOut()}>Log out</p>
           </div>
         </div>
       </div>
+      {user && (
+        <MyProfileModal
+          openProfile={openProfile}
+          setOpenProfile={setOpenProfile}
+        />
+      )}
     </nav>
   );
 };

@@ -1,5 +1,5 @@
 .navbar {
-  height: 6vh;
+  height: 8vh;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -36,23 +36,28 @@
 }
 
 .user-avatar {
-  height: 60px;
-  width: 60px;
-  border-radius: 10px;
-  object-fit: contain;
+  height: 30px;
+  border-radius: 20px;
   margin-right: 0.5rem;
 }
 .nav-user-menu {
   position: absolute;
-  top: 115%;
+  top: 100%;
   left: 0;
   display: none;
-  width: 100%;
+  width: 105%;
   border-radius: 10px;
   pointer-events: none;
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
+  color: #fff;
 }
 .nav-user-menu p {
-  padding: 0.3rem 0 0.3rem 0.3rem;
+  padding: 0.3rem;
+}
+
+.nav-user-menu p:hover {
+  background: linear-gradient(to left, #8e2de2, #4a00e0);
+  border-radius: 10px;
 }
 
 .nav-user-menu p:nth-child(1) {
@@ -63,4 +68,14 @@
   pointer-events: all;
   background-color: #fff;
   z-index: 2;
+}
+@media screen and (max-width: 1280px) {
+  .user-avatar {
+    height: 25px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .user-avatar {
+    height: 30px;
+  }
 }
