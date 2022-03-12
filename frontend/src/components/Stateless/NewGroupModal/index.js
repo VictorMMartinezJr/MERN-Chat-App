@@ -13,6 +13,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [addToGroupError, setAddToGroupError] = useState("");
   const [fillInputsError, setFillInputsError] = useState("");
+  const [renameGroupError, setRenameGroupError] = useState("");
   const { user, chats, setChats } = useContext(Chat);
 
   const handleSearch = async (query) => {
@@ -28,6 +29,9 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
       };
 
       const { data } = await axios.get(`/api/user?search=${search}`, config);
+      if (data.length === 0) {
+        setAddToGroupError("User not found"); // Set Error if user not found in database
+      }
       setSearchResults(data);
     } catch (err) {
       console.log(err.message);
@@ -41,7 +45,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
     }
 
     if (groupChatName.length > 15) {
-      setFillInputsError("Max chat name length is 15"); // Error if password is too long
+      setRenameGroupError("Max chat name length is 15"); // Error if password is too long
       return;
     }
 
@@ -104,6 +108,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
             setGroupChatName("");
             setAddToGroupError("");
             setFillInputsError("");
+            setRenameGroupError("");
           }}
         />
         <h1 className="modal-header">Create New Group Chat</h1>
@@ -113,9 +118,11 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
               type="text"
               placeholder="Chat Name"
               value={groupChatName}
+              onFocus={() => setRenameGroupError("")}
               onChange={(e) => setGroupChatName(e.target.value)}
               className="modal-input"
             />
+            <p className="add-to-gc-error">{renameGroupError}</p>
           </div>
           <div className="new-gc-addusers-container">
             <input

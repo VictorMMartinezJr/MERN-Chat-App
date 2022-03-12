@@ -50,7 +50,7 @@ const UpdateGCModal = ({
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);
     } catch (err) {
-      console.log(err.message);
+      setRenameGroupError(err.message);
     }
     setGroupChatName("");
   };
@@ -67,9 +67,12 @@ const UpdateGCModal = ({
       };
 
       const { data } = await axios.get(`/api/user?search=${search}`, config);
+      if (data.length === 0) {
+        setAddToGroupError("User not found"); // Set Error if user not found in database
+      }
       setSearchResults(data);
     } catch (err) {
-      console.log(err.message);
+      setAddToGroupError(err.message);
     }
   };
 
@@ -97,12 +100,12 @@ const UpdateGCModal = ({
       setFetchAgain(!fetchAgain);
       fetchAllMessages();
     } catch (err) {
-      console.log(err.message);
+      setAddToGroupError(err.message);
     }
   };
 
   const handleGroup = async (user1) => {
-    if (selectedChat.users.find((u) => u._id === user1._id)) {
+    if (selectedChat.users.find((user) => user._id === user1._id)) {
       setAddToGroupError("User already in groupchat");
       return;
     }
@@ -129,7 +132,7 @@ const UpdateGCModal = ({
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);
     } catch (err) {
-      console.log(err.message);
+      setAddToGroupError(err.message);
     }
   };
 
@@ -185,6 +188,7 @@ const UpdateGCModal = ({
               placeholder="Add Users To Group"
               className="rename-gc-input"
               value={search}
+              onFocus={() => setAddToGroupError("")}
               onChange={(e) => handleSearch(e.target.value)}
             />
             <p className="add-to-gc-error">{addToGroupError}</p>
