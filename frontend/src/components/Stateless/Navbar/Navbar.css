@@ -53,6 +53,7 @@
 }
 .nav-user-menu p {
   padding: 0.3rem;
+  margin: 0.5rem 0;
 }
 
 .nav-user-menu p:hover {

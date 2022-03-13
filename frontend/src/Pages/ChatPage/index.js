@@ -1,7 +1,6 @@
 import "./ChatPage.css";
 import { useContext, useState } from "react";
 import Navbar from "../../components/Stateless/Navbar";
-import MyChats from "../../components/Stateless/Chats";
 import Chatbox from "../../components/Stateless/Chatbox";
 import SearchRight from "../../components/Stateless/SearchRight";
 import Chats from "../../components/Stateless/Chats";

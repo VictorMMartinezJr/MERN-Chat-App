@@ -4,12 +4,20 @@ import axios from "axios";
 import { Chat } from "../../../context/ChatProvider";
 import NewGroupModal from "../NewGroupModal";
 import { getSender, getSenderAvatar } from "../ChatLogic";
+import { FiSearch } from "react-icons/fi";
 
 const Chats = ({ setFetchAgain, fetchAgain }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [loggedUser, setLoggedUser] = useState({});
-  const { user, chats, setChats, selectedChat, setSelectedChat, iPadSearch } =
-    useContext(Chat);
+  const {
+    user,
+    chats,
+    setChats,
+    selectedChat,
+    setSelectedChat,
+    iPadSearch,
+    setiPadSearch,
+  } = useContext(Chat);
 
   const iPadScreen = window.matchMedia("(max-width: 1024px)");
 
@@ -47,16 +55,26 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
   return (
     <section
       className={
-        (selectedChat && iPadScreen.matches) || (selectedChat && iPadSearch)
+        (selectedChat && iPadScreen.matches) ||
+        (selectedChat && iPadSearch) ||
+        (!selectedChat && iPadSearch)
           ? "chats-section-ipad"
           : "chats-section"
       }
     >
       <span className="chats-header">
         <h1 className="chats-title">Chats</h1>
-        <button className="new-chat-btn" onClick={() => setModalOpen(true)}>
-          New Group
-        </button>
+        <span className="chats-btns">
+          <button className="new-chat-btn" onClick={() => setModalOpen(true)}>
+            New Group
+          </button>
+          {iPadScreen.matches && (
+            <FiSearch
+              className="chats-search-icon"
+              onClick={() => setiPadSearch(true)}
+            />
+          )}
+        </span>
       </span>
       <NewGroupModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <>

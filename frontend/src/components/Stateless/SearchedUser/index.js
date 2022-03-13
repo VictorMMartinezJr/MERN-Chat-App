@@ -3,7 +3,8 @@ import { Chat } from "../../../context/ChatProvider";
 import "./SearchedUser.css";
 
 export const SearchedUser = ({ searchedUser }) => {
-  const { user, chats, setChats } = useContext(Chat);
+  const { user, chats, setChats, setSelectedChat, setiPadSearch } =
+    useContext(Chat);
   // Capitalize first letter in user info
   const toUpperCase = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -24,6 +25,8 @@ export const SearchedUser = ({ searchedUser }) => {
 
       if (!chats.find((chat) => chat._id === data._id)) {
         setChats([data, ...chats]);
+        setSelectedChat(data);
+        setiPadSearch(false); // Make chatbox fullscreen after clicking on user on (max-width: 1024px)
       }
     } catch (error) {
       console.log(error.message);

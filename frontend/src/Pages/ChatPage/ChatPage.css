@@ -1,10 +1,11 @@
 .chat-page {
-  height: 90vh;
-  width: 80vw;
+  height: 95vh;
+  width: 95vw;
   background: #e4e3e3;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 15px #000;
 }
 .chat-content {
   display: flex;

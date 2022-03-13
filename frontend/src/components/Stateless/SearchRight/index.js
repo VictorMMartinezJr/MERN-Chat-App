@@ -69,6 +69,12 @@ const SearchRight = () => {
       ) : (
         <section className={iPadSearch ? "search-right" : "search-right-ipad"}>
           <div className="search-input-content">
+            <button
+              className="back-to-chats-btn"
+              onClick={() => setiPadSearch(false)}
+            >
+              My Chats
+            </button>
             <span className="search-input-span">
               <input
                 className="search-input"

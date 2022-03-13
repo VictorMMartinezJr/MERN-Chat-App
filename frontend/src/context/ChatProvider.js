@@ -12,6 +12,7 @@ const ChatContext = ({ children }) => {
   const [chats, setChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
+  const [iPadSearch, setiPadSearch] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -36,6 +37,8 @@ const ChatContext = ({ children }) => {
         setChats,
         selectedChat,
         setSelectedChat,
+        iPadSearch,
+        setiPadSearch,
       }}
     >
       {children}

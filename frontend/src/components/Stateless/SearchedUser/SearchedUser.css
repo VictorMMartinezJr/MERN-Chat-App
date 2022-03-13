@@ -33,4 +33,16 @@
     height: 30px;
     margin: 0.2rem;
   }
+  .searched-user-email {
+    margin-bottom: 0.5rem;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .searched-user {
+    width: 80%;
+  }
+  .searched-user-img {
+    height: 45px;
+    margin: 0.2rem;
+  }
 }

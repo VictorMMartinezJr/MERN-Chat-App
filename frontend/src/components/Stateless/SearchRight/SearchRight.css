@@ -17,6 +17,9 @@
   align-items: center;
 }
 .search-input-span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   margin: 0 0.5rem;
   flex: 1;
@@ -36,7 +39,8 @@
   transform: translate(0, -50%);
   font-size: 1.1rem;
 }
-.search-btn {
+.search-btn,
+.back-to-chats-btn {
   margin-right: 0.5rem;
   padding: 0.5rem;
   border: none;
@@ -62,7 +66,9 @@
 .search-right-ipad {
   display: none;
 }
-
+.back-to-chats-btn {
+  margin: 0 0 0 0.5rem;
+}
 @media screen and (max-width: 1024px) {
   .search-right {
     width: 100%;
