@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema(
       required: [true, "Please enter a password"],
       minlength: [6, "Minimum password length is 6"],
     },
-    avatar: { type: String, default: "./default-user.svg" },
+    avatar: { type: String, required: [true, "Please choose an avatar"] },
   },
   { timestamps: true }
 );

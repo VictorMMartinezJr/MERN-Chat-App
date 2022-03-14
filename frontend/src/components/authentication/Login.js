@@ -30,8 +30,10 @@ const Login = () => {
       const data = await res.json();
 
       if (data.errors) {
+        setLoading(false);
         setEmailError(data.errors.email);
         setPasswordError(data.errors.password);
+        return;
       }
       if (data._id) {
         history.push("/chats");
@@ -41,7 +43,7 @@ const Login = () => {
       setUser(data);
       setLoading(false);
     } catch (error) {
-      console.log("Error creating user");
+      setEmailError("Error creating user");
       setUser({});
       setLoading(false);
       return;
@@ -60,7 +62,10 @@ const Login = () => {
             placeholder="Enter Your Email"
             required
             value={email}
-            onFocus={() => setTopInputActive(true)}
+            onFocus={() => {
+              setEmailError("");
+              setTopInputActive(true);
+            }}
             onBlur={() => setTopInputActive(false)}
             className={
               topInputActive ? "form-input active-input" : "form-input"
@@ -79,7 +84,10 @@ const Login = () => {
             type={showPw ? "text" : "password"}
             placeholder="Enter Your Password"
             required
-            onFocus={() => setBottomInputActive(true)}
+            onFocus={() => {
+              setPasswordError("");
+              setBottomInputActive(true);
+            }}
             onBlur={() => setBottomInputActive(false)}
             className={
               bottomInputActive ? "form-input active-input" : "form-input"

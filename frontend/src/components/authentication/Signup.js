@@ -13,8 +13,10 @@ const Signup = () => {
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [confirmError, setConfirmError] = useState("");
   const [confirm, setConfirm] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [avatarError, setAvatarError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
@@ -39,7 +41,6 @@ const Signup = () => {
         .then((data) => {
           setAvatar(data.url.toString());
           setLoading(false);
-          console.log(data.url.toString());
         })
         .catch((err) => {
           console.log(err.message);
@@ -53,17 +54,16 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let newUser;
-    if (avatar) newUser = { name, email, password, avatar };
-    if (!avatar) newUser = { name, email, password };
+    newUser = { name, email, password, avatar };
 
     setLoading(true);
     if (password && !confirm) {
-      console.log("Please confirm password");
+      setConfirmError("Please confirm password");
       setLoading(false);
       return;
     }
     if (password && password !== confirm) {
-      console.log("Passwords do not match");
+      setPasswordError("Passwords do not match");
       setLoading(false);
       return;
     }
@@ -81,6 +81,7 @@ const Signup = () => {
         setNameError(data.errors.name);
         setEmailError(data.errors.email);
         setPasswordError(data.errors.password);
+        setAvatarError(data.errors.avatar);
       }
       if (data._id) {
         history.push("/chats");
@@ -108,6 +109,7 @@ const Signup = () => {
             placeholder="Enter Your Name"
             required
             className="form-input"
+            onFocus={() => setNameError("")}
             onChange={(e) => setName(e.target.value)}
           />
           <span className="input-error">{nameError}</span>
@@ -121,6 +123,7 @@ const Signup = () => {
             placeholder="Enter Your Email"
             required
             className="form-input"
+            onFocus={() => setEmailError("")}
             onChange={(e) => setEmail(e.target.value)}
           />
           <span className="input-error">{emailError}</span>
@@ -134,6 +137,7 @@ const Signup = () => {
             placeholder="Enter Your Password"
             required
             className="form-input"
+            onFocus={() => setPasswordError("")}
             onChange={(e) => setPassword(e.target.value)}
           />
           <p className="show-pw" onClick={() => setShowPw(!showPw)}>
@@ -150,6 +154,7 @@ const Signup = () => {
             placeholder="Confirm Your Password"
             required
             className="form-input"
+            onFocus={() => setConfirmError("")}
             onChange={(e) => setConfirm(e.target.value)}
           />
           <p
@@ -158,6 +163,7 @@ const Signup = () => {
           >
             {showConfirm ? "Hide" : "Show"}
           </p>
+          <span className="input-error">{confirmError}</span>
         </div>
         {/* Upload avatar input */}
         <div className="input-container">
@@ -166,8 +172,10 @@ const Signup = () => {
             name="avatar"
             type="file"
             accept="image/*"
+            required
             onChange={(e) => postDetails(e.target.files[0])}
           />
+          <span className="input-error">{avatarError}</span>
         </div>
         {!loading && (
           <button type="submit" className="submit-btn" onClick={handleSubmit}>
