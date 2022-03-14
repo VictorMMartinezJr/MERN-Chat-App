@@ -3,6 +3,9 @@ export const getSender = (loggedInUser, users) => {
   return users[0]._id === loggedInUser._id ? users[1].name : users[0].name;
 };
 
+export const getSenderAvatar = (loggedInUser, users) => {
+  return users[0]._id === loggedInUser._id ? users[1].avatar : users[0].avatar;
+};
 export const isSameSender = (messages, m, i, userId) => {
   return (
     i < messages.length - 1 &&

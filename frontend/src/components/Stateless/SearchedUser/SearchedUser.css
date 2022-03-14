@@ -23,6 +23,8 @@
   font-weight: 700;
   font-size: 1rem;
 }
+
+/* Media Queries */
 @media screen and (max-width: 1280px) {
   .searched-user {
     height: auto;
@@ -39,10 +41,35 @@
 }
 @media screen and (max-width: 1024px) {
   .searched-user {
+    height: 70px;
     width: 80%;
+    flex-direction: row;
   }
   .searched-user-img {
     height: 45px;
-    margin: 0.2rem;
+    margin: 0rem;
+  }
+  .searched-user-name {
+    margin-top: 0.5rem;
+  }
+  .searched-user-email {
+    margin-bottom: 0.5rem;
+  }
+}
+@media screen and (max-width: 540px) {
+  .searched-user {
+    width: 70%;
+  }
+  .searched-user-img {
+    height: 30px;
+  }
+  .searched-user-name,
+  .searched-user-email {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .searched-user {
+    width: 90%;
   }
 }

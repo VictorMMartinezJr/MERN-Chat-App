@@ -70,13 +70,33 @@
   background-color: #fff;
   z-index: 2;
 }
+
+/* Media Queries */
 @media screen and (max-width: 1280px) {
   .user-avatar {
     height: 25px;
   }
 }
 @media screen and (max-width: 1024px) {
+  .navbar {
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+    border-radius: 0;
+    color: #fff;
+  }
   .user-avatar {
     height: 30px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .navbar-title {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 540px) {
+  .navbar-title {
+    font-size: 1.2rem;
+  }
+  .user-avatar {
+    height: 20px;
   }
 }

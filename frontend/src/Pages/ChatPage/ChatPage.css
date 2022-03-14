@@ -12,3 +12,12 @@
   justify-content: space-between;
   align-items: center;
 }
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
+  .chat-page {
+    height: 100vh;
+    width: 100%;
+    box-shadow: none;
+  }
+}

@@ -9,8 +9,11 @@
 .chatbox-ipad {
   display: none;
 }
+
+/* Media Queries */
 @media screen and (max-width: 1024px) {
   .chatbox {
+    height: calc(100vh - 8vh);
     width: 100%;
   }
 }

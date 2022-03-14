@@ -35,14 +35,14 @@
 }
 .modal-header {
   font-size: 1.8rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 .modal-form {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 150px;
+  height: auto;
   width: 90%;
 }
 .new-gc-name-input-container,
@@ -56,6 +56,7 @@
   outline: none;
   border-radius: 10px;
   border: 1px solid #707070;
+  margin: 0.8rem 0;
 }
 .user-badges {
   display: flex;
@@ -68,7 +69,7 @@
   border-radius: 10px;
   border: none;
   background: linear-gradient(to right, #8e2de2, #4a00e0);
-  margin-top: 1rem;
+  margin: 1rem 0;
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
@@ -76,4 +77,40 @@
 }
 .modal-submit-btn:hover {
   background: linear-gradient(to left, #8e2de2, #4a00e0);
+}
+.add-to-gc-error {
+  font-size: 0.7rem;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: red;
+  font-weight: 700;
+}
+
+/* Media Queries */
+@media screen and (max-width: 540px) {
+  .new-group-modal {
+    min-height: 300px;
+    width: 400px;
+  }
+  .modal-header {
+    font-size: 1.2rem;
+  }
+  .modal-submit-btn {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .new-group-modal {
+    width: 95%;
+  }
+}
+@media screen and (max-width: 360px) {
+  .modal-input {
+    padding: 0.6rem 0 0.6rem 5px;
+  }
+  .modal-submit-btn {
+    padding: 0.8rem 0 0.8rem 5px;
+  }
 }

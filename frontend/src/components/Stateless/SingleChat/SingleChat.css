@@ -82,13 +82,41 @@
   margin-top: 0.5rem;
   background: #e4e3e3;
 }
+
+/* Media Queries */
 @media screen and (max-width: 1280px) {
   .single-chat-header img {
     height: 25px;
   }
 }
 @media screen and (max-width: 1024px) {
+  .chatbox-header {
+    height: auto;
+  }
+  .single-chat-header {
+    justify-content: center;
+  }
   .single-chat-header img {
     height: 30px;
+  }
+  .messages-container {
+    width: 100%;
+    border-radius: 0;
+  }
+}
+@media screen and (max-width: 540px) {
+  .chatbox-header {
+    margin-top: 0.5rem;
+  }
+  .chat-title {
+    font-size: 1rem;
+  }
+  .single-chat-header img {
+    height: 25px;
+  }
+  .update-gc-btn,
+  .search-user-icon,
+  .single-chat-back-arrow {
+    font-size: 1.3rem;
   }
 }

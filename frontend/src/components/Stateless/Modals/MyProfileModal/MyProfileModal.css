@@ -13,6 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #000;
 }
 .myprofile-modal {
   min-height: 400px;
@@ -40,4 +41,32 @@
 .myprofile-modal-img {
   height: 200px;
   border-radius: 10px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 540px) {
+  .myprofile-modal {
+    min-height: 300px;
+    width: 400px;
+  }
+  .myprofile-modal-name {
+    font-size: 1.3rem;
+  }
+  .myprofile-modal-email {
+    font-size: 1.1rem;
+  }
+  .myprofile-modal-img {
+    height: 130px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .myprofile-modal {
+    width: 95%;
+  }
+  .myprofile-modal-name {
+    font-size: 1.2rem;
+  }
+  .myprofile-modal-email {
+    font-size: 1rem;
+  }
 }

@@ -57,11 +57,13 @@
 .search-error {
   font-size: 0.7rem;
   position: absolute;
-  top: 100%;
+  top: 105%;
   left: 50%;
   transform: translateX(-50%);
   color: red;
   font-weight: 700;
+  width: 100%;
+  text-align: center;
 }
 .search-right-ipad {
   display: none;
@@ -69,8 +71,30 @@
 .back-to-chats-btn {
   margin: 0 0 0 0.5rem;
 }
+
+/* Media Queries */
 @media screen and (max-width: 1024px) {
   .search-right {
+    height: calc(100vh - 8vh);
     width: 100%;
+  }
+}
+@media screen and (max-width: 540px) {
+  .search-btn,
+  .back-to-chats-btn {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (max-width: 360px) {
+  .search-input-content {
+    flex-direction: column;
+  }
+  .search-input-span {
+    margin: 0.6rem 0;
+    width: 90%;
+  }
+  .search-btn,
+  .back-to-chats-btn {
+    margin: 0.5rem 0;
   }
 }
