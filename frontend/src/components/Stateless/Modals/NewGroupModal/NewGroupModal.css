@@ -32,10 +32,12 @@
   margin: 0.5rem;
   font-size: 1.7rem;
   cursor: pointer;
+  color: #444444;
 }
 .modal-header {
   font-size: 1.8rem;
   margin: 1rem 0;
+  color: #da0037;
 }
 .modal-form {
   display: flex;
@@ -54,9 +56,15 @@
   width: 100%;
   padding: 0.8rem 0 0.8rem 5px;
   outline: none;
-  border-radius: 10px;
-  border: 1px solid #707070;
+  border: none;
+  border-bottom: 1px solid #444444;
   margin: 0.8rem 0;
+  position: relative;
+  transition: border-bottom 0.2s ease-in-out;
+}
+.active-input {
+  border-bottom: 1px solid #da0037;
+  transition: border-bottom 0.2s ease-in-out;
 }
 .user-badges {
   display: flex;
@@ -68,7 +76,7 @@
   padding: 1rem 0 1rem 5px;
   border-radius: 10px;
   border: none;
-  background: linear-gradient(to right, #8e2de2, #4a00e0);
+  background: #da0037;
   margin: 1rem 0;
   font-size: 1.2rem;
   font-weight: 700;
@@ -76,7 +84,7 @@
   color: #f2f2f2;
 }
 .modal-submit-btn:hover {
-  background: linear-gradient(to left, #8e2de2, #4a00e0);
+  background: #e7003a;
 }
 .add-to-gc-error {
   font-size: 0.7rem;

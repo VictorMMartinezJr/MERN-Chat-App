@@ -39,20 +39,23 @@
   transform: translate(0, -50%);
   font-size: 1.1rem;
 }
-.search-btn,
-.back-to-chats-btn {
+.search-btn {
   margin-right: 0.5rem;
   padding: 0.5rem;
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 5px #707070;
-  background: linear-gradient(to right, #8e2de2, #4a00e0);
+  background: #da0037;
   cursor: pointer;
   color: #fff;
   font-weight: 700;
 }
+.back-to-chats-btn {
+  font-size: 1.8rem;
+  cursor: pointer;
+}
 .search-btn:hover {
-  background: linear-gradient(to left, #8e2de2, #4a00e0);
+  background: #e7003a;
 }
 .search-error {
   font-size: 0.7rem;
@@ -80,9 +83,11 @@
   }
 }
 @media screen and (max-width: 540px) {
-  .search-btn,
-  .back-to-chats-btn {
+  .search-btn {
     font-size: 0.8rem;
+  }
+  .back-to-chats-btn {
+    font-size: 1.3rem;
   }
 }
 @media screen and (max-width: 360px) {

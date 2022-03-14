@@ -11,6 +11,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [topInputActive, setTopInputActive] = useState(false);
+  const [bottomInputActive, setBottomInputActive] = useState(false);
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -58,6 +60,11 @@ const Login = () => {
             placeholder="Enter Your Email"
             required
             value={email}
+            onFocus={() => setTopInputActive(true)}
+            onBlur={() => setTopInputActive(false)}
+            className={
+              topInputActive ? "form-input active-input" : "form-input"
+            }
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -72,6 +79,11 @@ const Login = () => {
             type={showPw ? "text" : "password"}
             placeholder="Enter Your Password"
             required
+            onFocus={() => setBottomInputActive(true)}
+            onBlur={() => setBottomInputActive(false)}
+            className={
+              bottomInputActive ? "form-input active-input" : "form-input"
+            }
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

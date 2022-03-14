@@ -48,7 +48,6 @@
   width: 105%;
   border-radius: 10px;
   pointer-events: none;
-  background: linear-gradient(to right, #8e2de2, #4a00e0);
   color: #fff;
 }
 .nav-user-menu p {
@@ -57,7 +56,7 @@
 }
 
 .nav-user-menu p:hover {
-  background: linear-gradient(to left, #8e2de2, #4a00e0);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
@@ -67,7 +66,7 @@
 .nav-user-menu.active {
   display: block;
   pointer-events: all;
-  background-color: #fff;
+  background-color: #da0037;
   z-index: 2;
 }
 
@@ -79,12 +78,17 @@
 }
 @media screen and (max-width: 1024px) {
   .navbar {
-    background: linear-gradient(to right, #8e2de2, #4a00e0);
+    background: #da0037;
     border-radius: 0;
     color: #fff;
   }
   .user-avatar {
     height: 30px;
+  }
+  .nav-user-menu {
+    top: 120%;
+    left: -20px;
+    width: 120%;
   }
 }
 @media screen and (max-width: 768px) {
@@ -98,5 +102,8 @@
   }
   .user-avatar {
     height: 20px;
+  }
+  .nav-user-menu p {
+    font-size: 0.8rem;
   }
 }

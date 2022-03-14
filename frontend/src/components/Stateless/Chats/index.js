@@ -2,8 +2,8 @@ import "./Chats.css";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Chat } from "../../../context/ChatProvider";
-import NewGroupModal from "../NewGroupModal";
-import { getSender, getSenderAvatar } from "../ChatLogic";
+import NewGroupModal from "../Modals/NewGroupModal";
+import { getSender } from "../ChatLogic";
 import { FiSearch } from "react-icons/fi";
 
 const Chats = ({ setFetchAgain, fetchAgain }) => {
@@ -19,7 +19,7 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
     setiPadSearch,
   } = useContext(Chat);
 
-  const iPadScreen = window.matchMedia("(max-width: 1024px)");
+  const iPadScreen = window.matchMedia("(max-width: 1024px)"); // For conditional rendering on smaller screens
 
   const fetchChats = async () => {
     if (!user) {

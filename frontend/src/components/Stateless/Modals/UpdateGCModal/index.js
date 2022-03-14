@@ -1,10 +1,10 @@
 import "./UpdateGCModal.css";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useContext, useState } from "react";
-import { Chat } from "../../../context/ChatProvider";
-import AddedToGroupBadge from "../AddedToGroupBadge";
+import AddedToGroupBadge from "../../AddedToGroupBadge";
 import axios from "axios";
-import { SearchedModalUser } from "../SearchedUser";
+import { SearchedModalUser } from "../../SearchedUser";
+import { Chat } from "../../../../context/ChatProvider";
 
 const UpdateGCModal = ({
   fetchAgain,
@@ -19,6 +19,8 @@ const UpdateGCModal = ({
   const [searchResults, setSearchResults] = useState([]);
   const [addToGroupError, setAddToGroupError] = useState("");
   const [renameGroupError, setRenameGroupError] = useState("");
+  const [topInputActive, setTopInputActive] = useState(false);
+  const [bottomInputActive, setBottomInputActive] = useState(false);
 
   const renameGC = async (e) => {
     e.preventDefault();
@@ -172,9 +174,17 @@ const UpdateGCModal = ({
             <input
               type="text"
               placeholder="Rename Group Chat"
-              className="rename-gc-input"
+              className={
+                topInputActive
+                  ? "rename-gc-input active-input"
+                  : "rename-gc-input"
+              }
               value={groupChatName}
-              onFocus={() => setRenameGroupError("")} // Remove error when user starts typing again
+              onFocus={() => {
+                setTopInputActive(true);
+                setRenameGroupError("");
+              }} // Remove error when user starts typing again
+              onBlur={() => setTopInputActive(false)}
               onChange={(e) => setGroupChatName(e.target.value)}
             />
             <p className="rename-gc-error">{renameGroupError}</p>
@@ -186,9 +196,17 @@ const UpdateGCModal = ({
             <input
               type="text"
               placeholder="Add Users To Group"
-              className="rename-gc-input"
+              className={
+                bottomInputActive
+                  ? "rename-gc-input active-input"
+                  : "rename-gc-input"
+              }
               value={search}
-              onFocus={() => setAddToGroupError("")}
+              onFocus={() => {
+                setBottomInputActive(true);
+                setAddToGroupError("");
+              }}
+              onBlur={() => setBottomInputActive(false)}
               onChange={(e) => handleSearch(e.target.value)}
             />
             <p className="add-to-gc-error">{addToGroupError}</p>

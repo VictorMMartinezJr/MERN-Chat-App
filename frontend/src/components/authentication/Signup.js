@@ -107,6 +107,7 @@ const Signup = () => {
             type="text"
             placeholder="Enter Your Name"
             required
+            className="form-input"
             onChange={(e) => setName(e.target.value)}
           />
           <span className="input-error">{nameError}</span>
@@ -119,6 +120,7 @@ const Signup = () => {
             type="text"
             placeholder="Enter Your Email"
             required
+            className="form-input"
             onChange={(e) => setEmail(e.target.value)}
           />
           <span className="input-error">{emailError}</span>
@@ -131,6 +133,7 @@ const Signup = () => {
             type={showPw ? "text" : "password"}
             placeholder="Enter Your Password"
             required
+            className="form-input"
             onChange={(e) => setPassword(e.target.value)}
           />
           <p className="show-pw" onClick={() => setShowPw(!showPw)}>
@@ -146,6 +149,7 @@ const Signup = () => {
             type={showConfirm ? "text" : "password"}
             placeholder="Confirm Your Password"
             required
+            className="form-input"
             onChange={(e) => setConfirm(e.target.value)}
           />
           <p

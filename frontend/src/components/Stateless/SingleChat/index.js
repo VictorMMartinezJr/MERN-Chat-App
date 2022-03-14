@@ -4,7 +4,7 @@ import { Chat } from "../../../context/ChatProvider";
 import { FaUserEdit } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { IoMdArrowBack } from "react-icons/io";
-import UpdateGCModal from "../UpdateGCModal";
+import UpdateGCModal from "../Modals/UpdateGCModal";
 import ScrollableChat from "../ScrollableChat";
 import axios from "axios";
 import { getSender, getSenderAvatar } from "../ChatLogic";
@@ -16,7 +16,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState();
 
-  const iPadScreen = window.matchMedia("(max-width: 1024px)");
+  const iPadScreen = window.matchMedia("(max-width: 1024px)"); // For conditional rendering on smaller screens
 
   const fetchAllMessages = async () => {
     if (!selectedChat) return;

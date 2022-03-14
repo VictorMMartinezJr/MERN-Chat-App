@@ -3,6 +3,7 @@ import { BiSearch } from "react-icons/bi";
 import { useContext, useState } from "react";
 import { Chat } from "../../../context/ChatProvider";
 import { SearchedUser } from "../SearchedUser";
+import { IoMdArrowBack } from "react-icons/io";
 
 const SearchRight = () => {
   const { user, iPadSearch, setiPadSearch } = useContext(Chat);
@@ -10,7 +11,7 @@ const SearchRight = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchError, setSearchError] = useState();
 
-  const iPadScreen = window.matchMedia("(max-width: 1024px)");
+  const iPadScreen = window.matchMedia("(max-width: 1024px)"); // For conditional rendering on smaller screens
 
   // Search for users based on input value
   const handleSearch = async () => {
@@ -34,7 +35,6 @@ const SearchRight = () => {
     }
   };
 
-  console.log(iPadSearch);
   return (
     <>
       {!iPadScreen.matches ? (
@@ -69,12 +69,15 @@ const SearchRight = () => {
       ) : (
         <section className={iPadSearch ? "search-right" : "search-right-ipad"}>
           <div className="search-input-content">
-            <button
+            <IoMdArrowBack
               className="back-to-chats-btn"
-              onClick={() => setiPadSearch(false)}
-            >
-              My Chats
-            </button>
+              onClick={() => {
+                setSearchResults([]);
+                setiPadSearch(false);
+                setSearch("");
+                setSearchError("");
+              }}
+            />
             <span className="search-input-span">
               <input
                 className="search-input"

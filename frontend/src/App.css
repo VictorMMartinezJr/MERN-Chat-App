@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #8e2de2, #4a00e0);
+  background: url("./assets/images/wallpaper.jpg");
   background-position: center;
   background-size: cover;
   font-family: "Sora", sans-serif;

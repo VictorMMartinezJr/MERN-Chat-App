@@ -1,10 +1,10 @@
 import "./NewGroupModal.css";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useContext, useState } from "react";
-import { Chat } from "../../../context/ChatProvider";
 import axios from "axios";
-import { SearchedModalUser } from "../SearchedUser";
-import AddedToGroupBadge from "../AddedToGroupBadge";
+import { Chat } from "../../../../context/ChatProvider";
+import AddedToGroupBadge from "../../AddedToGroupBadge";
+import { SearchedModalUser } from "../../SearchedUser";
 
 const NewGroupModal = ({ modalOpen, setModalOpen }) => {
   const [groupChatName, setGroupChatName] = useState("");
@@ -14,6 +14,8 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
   const [addToGroupError, setAddToGroupError] = useState("");
   const [fillInputsError, setFillInputsError] = useState("");
   const [renameGroupError, setRenameGroupError] = useState("");
+  const [topInputActive, setTopInputActive] = useState(false);
+  const [bottomInputActive, setBottomInputActive] = useState(false);
   const { user, chats, setChats } = useContext(Chat);
 
   const handleSearch = async (query) => {
@@ -118,9 +120,15 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
               type="text"
               placeholder="Chat Name"
               value={groupChatName}
-              onFocus={() => setRenameGroupError("")}
+              onFocus={() => {
+                setTopInputActive(true);
+                setRenameGroupError("");
+              }}
+              onBlur={() => setTopInputActive(false)}
               onChange={(e) => setGroupChatName(e.target.value)}
-              className="modal-input"
+              className={
+                topInputActive ? "modal-input active-input" : "modal-input"
+              }
             />
             <p className="add-to-gc-error">{renameGroupError}</p>
           </div>
@@ -128,12 +136,16 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
             <input
               type="text"
               placeholder="Add Users To Group"
-              className="modal-input"
+              className={
+                bottomInputActive ? "modal-input active-input" : "modal-input"
+              }
               value={search}
               onFocus={() => {
                 setAddToGroupError("");
                 setFillInputsError("");
+                setBottomInputActive(true);
               }}
+              onBlur={() => setBottomInputActive(false)}
               onChange={(e) => handleSearch(e.target.value)}
             />
             <p className="add-to-gc-error">{addToGroupError}</p>
