@@ -22,12 +22,9 @@ const Signup = () => {
 
   const postDetails = (avatar) => {
     setLoading(true);
-    if (avatar === undefined) {
-      console.log("Please select an image");
-      return;
-    }
 
     if (avatar.type === "image/jpeg" || avatar.type === "image/png") {
+      // Upload avatar to cloudinary
       const formData = new FormData();
       formData.append("file", avatar);
       formData.append("upload_preset", "chit-chat");
@@ -43,40 +40,40 @@ const Signup = () => {
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err.message);
+          setAvatarError(err.message);
           setLoading(false);
         });
     } else {
-      console.log("Not a valid image");
+      setAvatarError("Not a valid image");
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let newUser;
-    newUser = { name, email, password, avatar };
-
     setLoading(true);
+
+    // Error if confirm password input is not filled only if password exists
     if (password && !confirm) {
       setConfirmError("Please confirm password");
       setLoading(false);
       return;
     }
+    // Check if passwords match only if password exists
     if (password && password !== confirm) {
       setPasswordError("Passwords do not match");
       setLoading(false);
       return;
     }
 
+    // Create User
     try {
       const res = await fetch("/api/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password, avatar }),
       });
-
       const data = await res.json();
-
+      // Check if errors exists & display them
       if (data.errors) {
         setNameError(data.errors.name);
         setEmailError(data.errors.email);
@@ -87,10 +84,12 @@ const Signup = () => {
       localStorage.setItem("userInfo", JSON.stringify(data));
       setUser(data);
       setLoading(false);
+
+      // Push user to chat page if successful signup
       if (data._id) {
         history.push("/chats");
       }
-    } catch (error) {
+    } catch (err) {
       setAvatarError("Error creating user");
       setLoading(false);
       return;
@@ -109,7 +108,7 @@ const Signup = () => {
             placeholder="Enter Your Name"
             required
             className="form-input"
-            onFocus={() => setNameError("")}
+            onFocus={() => setNameError("")} // Clear error when user clicks on input again
             onChange={(e) => setName(e.target.value)}
           />
           <span className="input-error">{nameError}</span>
@@ -123,7 +122,7 @@ const Signup = () => {
             placeholder="Enter Your Email"
             required
             className="form-input"
-            onFocus={() => setEmailError("")}
+            onFocus={() => setEmailError("")} // Clear error when user clicks on input again
             onChange={(e) => setEmail(e.target.value)}
           />
           <span className="input-error">{emailError}</span>
@@ -137,7 +136,7 @@ const Signup = () => {
             placeholder="Enter Your Password"
             required
             className="form-input"
-            onFocus={() => setPasswordError("")}
+            onFocus={() => setPasswordError("")} // Clear error when user clicks on input again
             onChange={(e) => setPassword(e.target.value)}
           />
           <p className="show-pw" onClick={() => setShowPw(!showPw)}>
@@ -154,7 +153,7 @@ const Signup = () => {
             placeholder="Confirm Your Password"
             required
             className="form-input"
-            onFocus={() => setConfirmError("")}
+            onFocus={() => setConfirmError("")} // Clear error when user clicks on input again
             onChange={(e) => setConfirm(e.target.value)}
           />
           <p

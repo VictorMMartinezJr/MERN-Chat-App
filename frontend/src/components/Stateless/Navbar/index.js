@@ -18,7 +18,7 @@ const Navbar = () => {
     setUser({});
     setChats([]);
     setSelectedChat("");
-    history.push("/");
+    history.push("/"); // Push to login page
   };
 
   return (

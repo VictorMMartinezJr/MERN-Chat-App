@@ -5,30 +5,30 @@ import { Chat } from "../../context/ChatProvider";
 
 const Login = () => {
   const { setUser } = useContext(Chat);
-  const [showPw, setShowPw] = useState(false);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [showPw, setShowPw] = useState(false);
   const [topInputActive, setTopInputActive] = useState(false);
   const [bottomInputActive, setBottomInputActive] = useState(false);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
 
+    // Fetch User
     try {
       const res = await fetch("/api/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
       const data = await res.json();
 
+      // Check for any errors and display them
       if (data.errors) {
         setLoading(false);
         setEmailError(data.errors.email);
@@ -39,11 +39,11 @@ const Login = () => {
       localStorage.setItem("userInfo", JSON.stringify(data));
       setUser(data);
       setLoading(false);
-
+      // Push user to chats page if successful login
       if (data._id) {
         history.push("/chats");
       }
-    } catch (error) {
+    } catch (err) {
       setEmailError("Error creating user");
       setUser({});
       setLoading(false);
@@ -63,10 +63,10 @@ const Login = () => {
             required
             value={email}
             onFocus={() => {
-              setEmailError("");
-              setTopInputActive(true);
+              setEmailError(""); // Clear error
+              setTopInputActive(true); // Set highlighted bottom border
             }}
-            onBlur={() => setTopInputActive(false)}
+            onBlur={() => setTopInputActive(false)} // Remove highlighted bottom border
             className={
               topInputActive ? "form-input active-input" : "form-input"
             }
@@ -85,10 +85,10 @@ const Login = () => {
             placeholder="Enter Your Password"
             required
             onFocus={() => {
-              setPasswordError("");
-              setBottomInputActive(true);
+              setPasswordError(""); // Clear error
+              setBottomInputActive(true); // Set highlighted bottom border
             }}
-            onBlur={() => setBottomInputActive(false)}
+            onBlur={() => setBottomInputActive(false)} // Remove highlighted bottom border
             className={
               bottomInputActive ? "form-input active-input" : "form-input"
             }
@@ -110,15 +110,26 @@ const Login = () => {
             Logging In...
           </button>
         )}
+        {/* Buttons for easy login */}
         <button
           type="button"
           className="submit-btn guest-btn"
           onClick={() => {
             setEmail("guest@example.com");
-            setPassword("123456");
+            setPassword("guest123456");
           }}
         >
           Get Guest Credentials
+        </button>
+        <button
+          type="button"
+          className="submit-btn guest-btn"
+          onClick={() => {
+            setEmail("guest2@example.com");
+            setPassword("guestTwo123456");
+          }}
+        >
+          Get 2nd Guest Credentials
         </button>
       </div>
     </form>

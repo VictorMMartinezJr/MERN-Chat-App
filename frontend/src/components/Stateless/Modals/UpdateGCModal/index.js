@@ -26,15 +26,16 @@ const UpdateGCModal = ({
     e.preventDefault();
 
     if (!groupChatName) {
-      setRenameGroupError("Input empty");
+      setRenameGroupError("Input empty"); // Display error if no groupChatName input when called
       return;
     }
 
     if (groupChatName.length > 15) {
-      setRenameGroupError("Max chat name length is 15");
+      setRenameGroupError("Max chat name length is 15"); // Display error if no groupChatName exceeds 15
       return;
     }
 
+    // Rename GC
     try {
       const config = {
         headers: { Authorization: `Bearer ${user.token}` },
@@ -80,11 +81,13 @@ const UpdateGCModal = ({
   };
 
   const removeUser = async (user1) => {
+    // Check if user calling removeUser is the admin
     if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
       setAddToGroupError("Only admins can remove users");
       return;
     }
 
+    // Remove User
     try {
       const config = {
         headers: { Authorization: `Bearer ${user.token}` },
@@ -108,16 +111,19 @@ const UpdateGCModal = ({
   };
 
   const handleGroup = async (user1) => {
+    // Check if user being added already exists in GC
     if (selectedChat.users.find((user) => user._id === user1._id)) {
       setAddToGroupError("User already in groupchat");
       return;
     }
 
+    // Check if user calling removeUser is the admin
     if (selectedChat.groupAdmin._id !== user._id) {
       setAddToGroupError("Only Admins can add users");
       return;
     }
 
+    // Add User
     try {
       const config = {
         headers: { Authorization: `Bearer ${user.token}` },
@@ -182,11 +188,11 @@ const UpdateGCModal = ({
               }
               value={groupChatName}
               onFocus={() => {
-                setTopInputActive(true);
-                setRenameGroupError("");
+                setTopInputActive(true); // Add active bottom border
+                setRenameGroupError(""); // Remove errors
               }}
               onBlur={() => {
-                setTopInputActive(false);
+                setTopInputActive(false); // Remove active bottom border
               }}
               onChange={(e) => setGroupChatName(e.target.value)}
             />
@@ -206,16 +212,17 @@ const UpdateGCModal = ({
               }
               value={search}
               onFocus={() => {
-                setBottomInputActive(true);
-                setAddToGroupError("");
+                setBottomInputActive(true); // Add active bottom border
+                setAddToGroupError(""); // Remove errors
               }}
-              onBlur={() => setBottomInputActive(false)}
+              onBlur={() => setBottomInputActive(false)} // Remove active bottom border
               onChange={(e) => handleSearch(e.target.value)}
             />
             <p className="add-to-gc-error">{addToGroupError}</p>
           </div>
         </form>
         {searchResults?.slice(0, 4).map((user) => {
+          // Only allow 4 search results at once
           return (
             <SearchedModalUser
               key={user._id}
@@ -231,7 +238,11 @@ const UpdateGCModal = ({
             setOpenGCModal(false);
           }}
         >
-          Leave Group Chat
+          {selectedChat &&
+          selectedChat.isGroupChat &&
+          selectedChat.groupAdmin._id === user._id
+            ? "Delete Group Chat"
+            : "Leave Group Chat"}
         </button>
       </div>
     </div>

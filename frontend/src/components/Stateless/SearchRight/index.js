@@ -19,6 +19,8 @@ const SearchRight = () => {
       setSearchError("Search empty"); // Set Error if search input is empty
       return;
     }
+
+    // Search for users
     try {
       const res = await fetch(`/api/user?search=${search}`, {
         method: "GET",
@@ -29,6 +31,7 @@ const SearchRight = () => {
       if (data.length === 0) {
         setSearchError("User not found"); // Set Error if user not found in database
       }
+
       setSearchResults(data);
     } catch (err) {
       setSearchError(err.message);

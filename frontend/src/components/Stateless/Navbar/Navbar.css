@@ -34,7 +34,6 @@
   border-radius: 5px;
   padding: 1rem;
 }
-
 .user-avatar {
   height: 30px;
   border-radius: 20px;
@@ -43,9 +42,9 @@
 .nav-user-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: -20px;
   display: none;
-  width: 105%;
+  width: 120%;
   border-radius: 10px;
   pointer-events: none;
   color: #fff;
@@ -54,12 +53,10 @@
   padding: 0.3rem;
   margin: 0.5rem 0;
 }
-
 .nav-user-menu p:hover {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
-
 .nav-user-menu p:nth-child(1) {
   border-bottom: 1px solid #707070;
 }
@@ -87,8 +84,6 @@
   }
   .nav-user-menu {
     top: 120%;
-    left: -20px;
-    width: 120%;
   }
 }
 @media screen and (max-width: 768px) {

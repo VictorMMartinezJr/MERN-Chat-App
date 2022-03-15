@@ -5,6 +5,7 @@ import { Chat } from "../../../context/ChatProvider";
 import NewGroupModal from "../Modals/NewGroupModal";
 import { getSender } from "../ChatLogic";
 import { FiSearch } from "react-icons/fi";
+import sadMessage from "../../../assets/images/sad-message.svg";
 
 const Chats = ({ setFetchAgain, fetchAgain }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -43,11 +44,11 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  // Fetch user again if empty on first render
   useEffect(() => {
     setLoggedUser(user);
   });
 
+  // Fetch user again if empty on first render
   useEffect(() => {
     fetchChats();
   }, [loggedUser]);
@@ -103,7 +104,10 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
             })}
           </div>
         ) : (
-          <p>No chats</p>
+          <div className="no-chats">
+            <h1>No chats</h1>
+            <img src={sadMessage} alt="sad-message" />
+          </div>
         )}
       </>
     </section>

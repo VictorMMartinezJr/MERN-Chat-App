@@ -72,10 +72,13 @@
   background: #da0037;
   color: #fff;
 }
-.chat-user-img {
-  height: 25px;
-  border-radius: 20px;
-  margin-right: 0.5rem;
+.no-chats {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  width: 100%;
 }
 .chats-section-ipad {
   display: none;
@@ -113,6 +116,12 @@
   .single-chat {
     height: 70px;
   }
+  .no-chats h1 {
+    font-size: 1.2rem;
+  }
+  .no-chats img {
+    height: 100px;
+  }
 }
 @media screen and (max-width: 540px) {
   .chats-title {
@@ -129,6 +138,9 @@
     height: 50px;
     font-size: 0.8rem;
     margin: 1rem 0;
+  }
+  .no-chats img {
+    height: 70px;
   }
 }
 @media screen and (max-width: 500px) {

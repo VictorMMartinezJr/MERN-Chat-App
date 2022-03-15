@@ -12,7 +12,7 @@ const ChatContext = ({ children }) => {
   const [chats, setChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-  const [iPadSearch, setiPadSearch] = useState(false);
+  const [iPadSearch, setiPadSearch] = useState(false); // For conditional rendering of search page on smaller devices
   const history = useHistory();
 
   useEffect(() => {
@@ -20,10 +20,6 @@ const ChatContext = ({ children }) => {
       history.push("/"); // Redirect to login page if user is not signed in
     }
     localStorage.setItem("userInfo", JSON.stringify(user));
-
-    return () => {
-      setUser({}); // This worked for me
-    };
   }, []);
 
   return (

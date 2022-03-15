@@ -20,6 +20,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
 
   const handleSearch = async (query) => {
     setSearch(query);
+    // Check if search input exists
     if (!query) {
       setSearchResults([]);
       return;
@@ -29,14 +30,15 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
       const config = {
         headers: { Authorization: `Bearer ${user.token}` },
       };
-
       const { data } = await axios.get(`/api/user?search=${search}`, config);
+
       if (data.length === 0) {
         setAddToGroupError("User not found"); // Set Error if user not found in database
       }
+
       setSearchResults(data);
     } catch (err) {
-      console.log(err.message);
+      setAddToGroupError(err.message);
     }
   };
   const handleSubmit = async () => {
@@ -56,6 +58,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
       return;
     }
 
+    // Create GC
     try {
       const config = {
         headers: { Authorization: `Bearer ${user.token}` },
@@ -73,7 +76,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
       setChats([data, ...chats]);
       setModalOpen(false);
     } catch (err) {
-      console.log(err);
+      setAddToGroupError(err);
     }
   };
 
@@ -84,6 +87,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
   };
 
   const handleGroup = (userToAdd) => {
+    // Check if user being added has already been selected
     if (selectedUsers.includes(userToAdd)) {
       setFillInputsError("");
       setAddToGroupError("User already being added");
@@ -121,10 +125,10 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
               placeholder="Chat Name"
               value={groupChatName}
               onFocus={() => {
-                setTopInputActive(true);
-                setRenameGroupError("");
+                setTopInputActive(true); // Add active bottom border
+                setRenameGroupError(""); // Clear errors
               }}
-              onBlur={() => setTopInputActive(false)}
+              onBlur={() => setTopInputActive(false)} // Remove active bottom border
               onChange={(e) => setGroupChatName(e.target.value)}
               className={
                 topInputActive ? "modal-input active-input" : "modal-input"
@@ -141,11 +145,11 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
               }
               value={search}
               onFocus={() => {
-                setAddToGroupError("");
-                setFillInputsError("");
-                setBottomInputActive(true);
+                setAddToGroupError(""); // Clear errors
+                setFillInputsError(""); // Clear errors
+                setBottomInputActive(true); // Add active bottom border
               }}
-              onBlur={() => setBottomInputActive(false)}
+              onBlur={() => setBottomInputActive(false)} // Remove active bottom border
               onChange={(e) => handleSearch(e.target.value)}
             />
             <p className="add-to-gc-error">{addToGroupError}</p>
@@ -164,6 +168,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
           })}
         </div>
         {searchResults?.slice(0, 4).map((user) => {
+          // Only allow 4 search results at once
           return (
             <SearchedModalUser
               key={user._id}

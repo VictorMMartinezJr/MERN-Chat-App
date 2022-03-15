@@ -10,17 +10,19 @@ import axios from "axios";
 import { getSender, getSenderAvatar } from "../ChatLogic";
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-  const { user, selectedChat, setSelectedChat, setiPadSearch } =
+  const { user, selectedChat, setSelectedChat, setiPadSearch, chats } =
     useContext(Chat);
   const [openGCModal, setOpenGCModal] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState();
+  const [messagesError, setMessagesError] = useState("");
 
   const iPadScreen = window.matchMedia("(max-width: 1024px)"); // For conditional rendering on smaller screens
 
   const fetchAllMessages = async () => {
     if (!selectedChat) return;
 
+    // Fetch messages
     try {
       const config = {
         headers: {
@@ -34,7 +36,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       );
       setMessages(data);
     } catch (err) {
-      console.log(err.message);
+      setMessagesError(err.message);
     }
   };
 
@@ -70,12 +72,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
         setMessages([...messages, data]);
       } catch (err) {
-        console.log(err.message);
+        setMessagesError(err.message);
       }
     }
-  };
-  const typingHandler = (e) => {
-    setNewMessage(e.target.value);
   };
 
   return (
@@ -90,9 +89,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         {selectedChat ? (
           <>
             {selectedChat.isGroupChat ? (
-              <h1 className="chatbox-groupchat-title">
-                {selectedChat.chatName}
-              </h1>
+              <>
+                <h1 className="chatbox-groupchat-title">
+                  {selectedChat.chatName}
+                </h1>
+                <p className="input-error">{messagesError}</p>
+              </>
             ) : (
               <div className="single-chat-header">
                 <img
@@ -102,11 +104,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 <h1 className="chat-title">
                   {toUpperCase(getSender(user, selectedChat.users))}
                 </h1>
+                <p className="input-error">{messagesError}</p>
               </div>
             )}
           </>
         ) : (
-          <p className="no-chat-header">Select a chat to start chatting!</p>
+          <p className="no-chat-header">
+            {chats.length > 0
+              ? "Select a chat to start chatting!"
+              : "Search for users to start chatting!"}
+          </p>
         )}
         <span className="single-chat-icons">
           {selectedChat && (
@@ -139,7 +146,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           type="text"
           placeholder="Write a message"
           value={newMessage}
-          onChange={typingHandler}
+          onChange={(e) => setNewMessage(e.target.value)}
           className="messages-input"
         />
       </div>

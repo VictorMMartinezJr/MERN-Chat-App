@@ -1,5 +1,6 @@
 .message-container {
   display: flex;
+  align-items: center;
   width: 100%;
   padding: 0 0.5rem;
 }
@@ -8,4 +9,8 @@
   padding: 0.5rem 0.8rem;
   color: #fff;
   font-size: 0.8rem;
+}
+.message-avatar {
+  height: 30px;
+  margin: 0 0.5rem;
 }

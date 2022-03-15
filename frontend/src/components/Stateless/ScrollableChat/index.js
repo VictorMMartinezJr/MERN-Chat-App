@@ -10,6 +10,7 @@ import {
 
 const ScrollableChat = ({ messages }) => {
   const { user } = useContext(Chat);
+
   return (
     <ScrollableFeed className="scrollable-feed">
       {messages &&
@@ -26,6 +27,11 @@ const ScrollableChat = ({ messages }) => {
               ),
             }}
           >
+            <img
+              className="message-avatar"
+              src={message.sender.avatar}
+              alt="message-avatar"
+            />
             <span
               className="message"
               style={{

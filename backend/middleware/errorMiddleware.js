@@ -1,5 +1,4 @@
 const handleErrors = (err) => {
-  console.log(err.message, err.code);
   let errors = { name: "", email: "", password: "", avatar: "" };
 
   // Incorrect email
