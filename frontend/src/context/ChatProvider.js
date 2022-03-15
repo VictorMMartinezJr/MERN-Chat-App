@@ -22,7 +22,7 @@ const ChatContext = ({ children }) => {
     localStorage.setItem("userInfo", JSON.stringify(user));
 
     return () => {
-      setUser("");
+      setUser({}); // This worked for me
     };
   }, []);
 

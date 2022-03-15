@@ -83,15 +83,15 @@ const Signup = () => {
         setPasswordError(data.errors.password);
         setAvatarError(data.errors.avatar);
       }
-      if (data._id) {
-        history.push("/chats");
-      }
 
       localStorage.setItem("userInfo", JSON.stringify(data));
       setUser(data);
       setLoading(false);
+      if (data._id) {
+        history.push("/chats");
+      }
     } catch (error) {
-      console.log("Error creating user");
+      setAvatarError("Error creating user");
       setLoading(false);
       return;
     }

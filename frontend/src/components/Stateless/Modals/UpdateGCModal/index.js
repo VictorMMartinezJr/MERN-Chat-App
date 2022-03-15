@@ -51,6 +51,7 @@ const UpdateGCModal = ({
 
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);
+      setOpenGCModal(false);
     } catch (err) {
       setRenameGroupError(err.message);
     }
@@ -163,7 +164,7 @@ const UpdateGCModal = ({
           {selectedChat &&
             selectedChat.users.map((user) => (
               <AddedToGroupBadge
-                key={user.id}
+                key={user._id}
                 selectedUser={user}
                 handleDelete={() => removeUser(user)}
               />
@@ -183,8 +184,10 @@ const UpdateGCModal = ({
               onFocus={() => {
                 setTopInputActive(true);
                 setRenameGroupError("");
-              }} // Remove error when user starts typing again
-              onBlur={() => setTopInputActive(false)}
+              }}
+              onBlur={() => {
+                setTopInputActive(false);
+              }}
               onChange={(e) => setGroupChatName(e.target.value)}
             />
             <p className="rename-gc-error">{renameGroupError}</p>

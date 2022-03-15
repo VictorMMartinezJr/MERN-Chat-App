@@ -35,18 +35,18 @@ const Login = () => {
         setPasswordError(data.errors.password);
         return;
       }
-      if (data._id) {
-        history.push("/chats");
-      }
 
       localStorage.setItem("userInfo", JSON.stringify(data));
       setUser(data);
       setLoading(false);
+
+      if (data._id) {
+        history.push("/chats");
+      }
     } catch (error) {
       setEmailError("Error creating user");
       setUser({});
       setLoading(false);
-      return;
     }
   };
 
