@@ -15,6 +15,6 @@
   .chatbox {
     height: calc(100vh - 8vh);
     width: 100%;
-    border-radius: 0;
+    border-radius: 0px;
   }
 }

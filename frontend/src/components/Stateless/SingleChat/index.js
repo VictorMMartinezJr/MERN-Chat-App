@@ -6,6 +6,7 @@ import { FiSearch } from "react-icons/fi";
 import { IoMdArrowBack } from "react-icons/io";
 import UpdateGCModal from "../Modals/UpdateGCModal";
 import ScrollableChat from "../ScrollableChat";
+import Loader from "../Loader";
 import axios from "axios";
 import { getSender, getSenderAvatar } from "../ChatLogic";
 
@@ -16,10 +17,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState();
   const [messagesError, setMessagesError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const iPadScreen = window.matchMedia("(max-width: 1024px)"); // For conditional rendering on smaller screens
 
   const fetchAllMessages = async () => {
+    setIsLoading(true);
     if (!selectedChat) return;
 
     // Fetch messages
@@ -35,6 +38,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         config
       );
       setMessages(data);
+      setIsLoading(false);
     } catch (err) {
       setMessagesError(err.message);
     }
@@ -80,36 +84,44 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   return (
     <section className="chatbox-container">
       <div className="chatbox-header">
-        {selectedChat && iPadScreen.matches && (
-          <IoMdArrowBack
-            className="single-chat-back-arrow"
-            onClick={() => setSelectedChat("")}
-          />
-        )}
         {selectedChat ? (
           <>
             {selectedChat.isGroupChat ? (
-              <>
+              <div className="chatbox-header-left">
+                {iPadScreen.matches && (
+                  <IoMdArrowBack
+                    className="single-chat-back-arrow"
+                    onClick={() => setSelectedChat("")}
+                  />
+                )}
                 <h1 className="chatbox-groupchat-title">
                   {selectedChat.chatName}
                 </h1>
                 <p className="input-error">{messagesError}</p>
-              </>
+              </div>
             ) : (
-              <div className="single-chat-header">
-                <img
-                  src={getSenderAvatar(user, selectedChat.users)}
-                  alt="chat-user-avatar"
-                />
-                <h1 className="chat-title">
-                  {toUpperCase(getSender(user, selectedChat.users))}
-                </h1>
+              <div className="chatbox-header-left">
+                {iPadScreen.matches && (
+                  <IoMdArrowBack
+                    className="single-chat-back-arrow"
+                    onClick={() => setSelectedChat("")}
+                  />
+                )}
+                <span className="chatbox-user-title">
+                  <img
+                    src={getSenderAvatar(user, selectedChat.users)}
+                    alt="chat-user-avatar"
+                  />
+                  <h1 className="chat-title">
+                    {toUpperCase(getSender(user, selectedChat.users))}
+                  </h1>
+                </span>
                 <p className="input-error">{messagesError}</p>
               </div>
             )}
           </>
         ) : (
-          <p className="no-chat-header">
+          <p className="chatbox-header">
             {chats.length > 0
               ? "Select a chat to start chatting!"
               : "Search for users to start chatting!"}
@@ -139,16 +151,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           fetchAllMessages={fetchAllMessages}
         />
       </div>
+      {isLoading && selectedChat && <Loader className="messages-loader" />}
       <div className="messages-container">
-        <ScrollableChat messages={messages} />
-        <input
-          onKeyDown={sendMessage}
-          type="text"
-          placeholder="Write a message"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          className="messages-input"
-        />
+        {!isLoading && <ScrollableChat messages={messages} />}
+        {!isLoading && (
+          <input
+            onKeyDown={sendMessage}
+            type="text"
+            placeholder="Write a message"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            className="messages-input"
+          />
+        )}
       </div>
     </section>
   );

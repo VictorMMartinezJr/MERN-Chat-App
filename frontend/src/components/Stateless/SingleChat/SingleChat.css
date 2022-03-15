@@ -5,28 +5,25 @@
   align-items: center;
   height: 100%;
   width: 100%;
-}
-.no-chat-header {
-  margin-left: 0.5rem;
-  font-weight: 700;
+  position: relative;
 }
 .chatbox-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
+  height: 7%;
+  width: 100%;
+}
+.chatbox-header-left {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
   width: 100%;
 }
 .chatbox-groupchat-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
   align-self: start;
-  margin-left: 0.5rem;
-}
-.single-chat-header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
   margin-left: 0.5rem;
 }
 .single-chat-back-arrow {
@@ -35,10 +32,15 @@
   cursor: pointer;
 }
 .chat-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
 }
-.single-chat-header img {
+.chatbox-user-title {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+.chatbox-header-left img {
   height: 30px;
   border-radius: 20px;
   margin-right: 0.5rem;
@@ -50,6 +52,10 @@
   border-radius: 5px;
   cursor: pointer;
 }
+.single-chat-icons {
+  display: flex;
+  align-items: center;
+}
 .search-user-icon {
   margin: 0.5rem 0.5rem 0 0;
   font-size: 1.8rem;
@@ -60,28 +66,25 @@
 .messages-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  max-height: 93%;
+  height: 93%;
   width: 99%;
-  flex: 1;
   background: #fff;
-  margin: 0.5rem;
   border-radius: 10px;
-  flex: 1;
-}
-.messages-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .messages-input {
+  height: 7%;
   width: 100%;
-  padding: 0.5rem;
+  padding-left: 0.5rem;
   outline: none;
-  margin-top: 0.5rem;
+  border: none;
   background: #e4e3e3;
 }
-
+.messages-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 /* Media Queries */
 @media screen and (max-width: 1280px) {
   .single-chat-header img {
@@ -89,12 +92,6 @@
   }
 }
 @media screen and (max-width: 1024px) {
-  .chatbox-header {
-    height: auto;
-  }
-  .single-chat-header {
-    justify-content: center;
-  }
   .single-chat-header img {
     height: 30px;
   }
@@ -104,10 +101,8 @@
   }
 }
 @media screen and (max-width: 540px) {
-  .chatbox-header {
-    margin-top: 0.5rem;
-  }
-  .chat-title {
+  .chat-title,
+  .chatbox-groupchat-title {
     font-size: 1rem;
   }
   .single-chat-header img {
@@ -117,5 +112,15 @@
   .search-user-icon,
   .single-chat-back-arrow {
     font-size: 1.3rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .chatbox-header {
+    margin: 0.5rem 0;
+  }
+}
+@media screen and (max-width: 400px) {
+  .chatbox-header {
+    margin: 0;
   }
 }
