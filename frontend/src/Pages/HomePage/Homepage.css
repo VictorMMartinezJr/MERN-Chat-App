@@ -34,3 +34,21 @@
 .active-tab {
   border-bottom: 4px solid #da0037;
 }
+
+/* Media queries */
+@media screen and (max-width: 540px) {
+  .login-form {
+    height: auto;
+    width: 400px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .login-form {
+    height: 100vh;
+    width: 100%;
+    border-radius: 0;
+  }
+  .login-form {
+    justify-content: space-evenly;
+  }
+}

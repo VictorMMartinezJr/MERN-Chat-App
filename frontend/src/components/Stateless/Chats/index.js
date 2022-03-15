@@ -6,10 +6,12 @@ import NewGroupModal from "../Modals/NewGroupModal";
 import { getSender } from "../ChatLogic";
 import { FiSearch } from "react-icons/fi";
 import sadMessage from "../../../assets/images/sad-message.svg";
+import Loader from "../Loader";
 
 const Chats = ({ setFetchAgain, fetchAgain }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [loggedUser, setLoggedUser] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const {
     user,
     chats,
@@ -23,6 +25,7 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
   const iPadScreen = window.matchMedia("(max-width: 1024px)"); // For conditional rendering on smaller screens
 
   const fetchChats = async () => {
+    setIsLoading(true);
     if (!user) {
       return;
     }
@@ -34,6 +37,7 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
     try {
       const { data } = await axios.get("/api/chat", config);
       setChats(data);
+      setIsLoading(false);
     } catch (err) {
       console.log(err.message);
     }
@@ -53,6 +57,7 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
     fetchChats();
   }, [loggedUser]);
 
+  console.log(isLoading);
   return (
     <section
       className={
@@ -79,7 +84,7 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
       </span>
       <NewGroupModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       <>
-        {chats.length > 0 ? (
+        {chats.length > 0 && !isLoading ? (
           <div className="single-chats">
             {chats.map((chat) => {
               return (
@@ -105,11 +110,12 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
           </div>
         ) : (
           <div className="no-chats">
-            <h1>No chats</h1>
-            <img src={sadMessage} alt="sad-message" />
+            {!isLoading && <h1>No chats</h1>}
+            {!isLoading && <img src={sadMessage} alt="sad-message" />}
           </div>
         )}
       </>
+      {isLoading && <Loader />}
     </section>
   );
 };
