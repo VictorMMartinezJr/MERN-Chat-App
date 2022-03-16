@@ -82,90 +82,92 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   return (
-    <section className="chatbox-container">
-      <div className="chatbox-header">
-        {selectedChat ? (
-          <>
-            {selectedChat.isGroupChat ? (
-              <div className="chatbox-header-left">
-                {iPadScreen.matches && (
-                  <IoMdArrowBack
-                    className="single-chat-back-arrow"
-                    onClick={() => setSelectedChat("")}
-                  />
-                )}
-                <h1 className="chatbox-groupchat-title">
-                  {selectedChat.chatName}
-                </h1>
-                <p className="input-error">{messagesError}</p>
-              </div>
-            ) : (
-              <div className="chatbox-header-left">
-                {iPadScreen.matches && (
-                  <IoMdArrowBack
-                    className="single-chat-back-arrow"
-                    onClick={() => setSelectedChat("")}
-                  />
-                )}
-                <span className="chatbox-user-title">
-                  <img
-                    src={getSenderAvatar(user, selectedChat.users)}
-                    alt="chat-user-avatar"
-                  />
-                  <h1 className="chat-title">
-                    {toUpperCase(getSender(user, selectedChat.users))}
+    <>
+      <section className="chatbox-container">
+        <div className="chatbox-header">
+          {selectedChat ? (
+            <>
+              {selectedChat.isGroupChat ? (
+                <div className="chatbox-header-left">
+                  {iPadScreen.matches && (
+                    <IoMdArrowBack
+                      className="single-chat-back-arrow"
+                      onClick={() => setSelectedChat("")}
+                    />
+                  )}
+                  <h1 className="chatbox-groupchat-title">
+                    {selectedChat.chatName}
                   </h1>
-                </span>
-                <p className="input-error">{messagesError}</p>
-              </div>
+                  <p className="input-error">{messagesError}</p>
+                </div>
+              ) : (
+                <div className="chatbox-header-left">
+                  {iPadScreen.matches && (
+                    <IoMdArrowBack
+                      className="single-chat-back-arrow"
+                      onClick={() => setSelectedChat("")}
+                    />
+                  )}
+                  <span className="chatbox-user-title">
+                    <img
+                      src={getSenderAvatar(user, selectedChat.users)}
+                      alt="chat-user-avatar"
+                    />
+                    <h1 className="chat-title">
+                      {toUpperCase(getSender(user, selectedChat.users))}
+                    </h1>
+                  </span>
+                  <p className="input-error">{messagesError}</p>
+                </div>
+              )}
+            </>
+          ) : (
+            <p className="chatbox-header">
+              {chats.length > 0
+                ? "Select a chat to start chatting!"
+                : "Search for users to start chatting!"}
+            </p>
+          )}
+          <span className="single-chat-icons">
+            {selectedChat && (
+              <FaUserEdit
+                className="update-gc-btn"
+                onClick={() => setOpenGCModal(true)}
+              />
             )}
-          </>
-        ) : (
-          <p className="chatbox-header">
-            {chats.length > 0
-              ? "Select a chat to start chatting!"
-              : "Search for users to start chatting!"}
-          </p>
-        )}
-        <span className="single-chat-icons">
-          {selectedChat && (
-            <FaUserEdit
-              className="update-gc-btn"
-              onClick={() => setOpenGCModal(true)}
+            {selectedChat && iPadScreen.matches && (
+              <FiSearch
+                className="search-user-icon"
+                onClick={() => {
+                  setiPadSearch(true);
+                }}
+              />
+            )}
+          </span>
+        </div>
+        {isLoading && selectedChat && <Loader className="messages-loader" />}
+        <div className="messages-container">
+          {!isLoading && <ScrollableChat messages={messages} />}
+          {!isLoading && (
+            <input
+              onKeyDown={sendMessage}
+              type="text"
+              placeholder="Write a message"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              className="messages-input"
             />
           )}
-          {selectedChat && iPadScreen.matches && (
-            <FiSearch
-              className="search-user-icon"
-              onClick={() => {
-                setiPadSearch(true);
-              }}
-            />
-          )}
-        </span>
-        <UpdateGCModal
-          fetchAgain={fetchAgain}
-          setFetchAgain={setFetchAgain}
-          openGCModal={openGCModal}
-          setOpenGCModal={setOpenGCModal}
-          fetchAllMessages={fetchAllMessages}
-        />
-      </div>
-      {isLoading && selectedChat && <Loader className="messages-loader" />}
-      <div className="messages-container">
-        {!isLoading && <ScrollableChat messages={messages} />}
-        {!isLoading && (
-          <input
-            onKeyDown={sendMessage}
-            type="text"
-            placeholder="Write a message"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            className="messages-input"
-          />
-        )}
-      </div>
-    </section>
+        </div>
+      </section>
+      <UpdateGCModal
+        fetchAgain={fetchAgain}
+        setFetchAgain={setFetchAgain}
+        openGCModal={openGCModal}
+        setOpenGCModal={setOpenGCModal}
+        fetchAllMessages={fetchAllMessages}
+      />
+    </>
   );
 };
 

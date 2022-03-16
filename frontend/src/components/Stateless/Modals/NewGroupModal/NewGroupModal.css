@@ -86,15 +86,6 @@
 .modal-submit-btn:hover {
   background: #e7003a;
 }
-.add-to-gc-error {
-  font-size: 0.7rem;
-  position: absolute;
-  top: 90%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: red;
-  font-weight: 700;
-}
 
 /* Media Queries */
 @media screen and (max-width: 540px) {

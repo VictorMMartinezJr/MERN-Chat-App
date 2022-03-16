@@ -134,7 +134,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
                 topInputActive ? "modal-input active-input" : "modal-input"
               }
             />
-            <p className="add-to-gc-error">{renameGroupError}</p>
+            <p className="add-gc-error">{renameGroupError}</p>
           </div>
           <div className="new-gc-addusers-container">
             <input
@@ -152,8 +152,8 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
               onBlur={() => setBottomInputActive(false)} // Remove active bottom border
               onChange={(e) => handleSearch(e.target.value)}
             />
-            <p className="add-to-gc-error">{addToGroupError}</p>
-            <p className="add-to-gc-error">{fillInputsError}</p>
+            <p className="add-gc-error">{addToGroupError}</p>
+            <p className="add-gc-error">{fillInputsError}</p>
           </div>
         </form>
         <div className="user-badges">

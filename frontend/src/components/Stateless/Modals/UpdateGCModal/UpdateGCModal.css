@@ -6,9 +6,8 @@
   width: 100vw;
   background: rgba(0, 0, 0, 0.7);
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 0%;
+  top: 0%;
   z-index: 2;
   display: flex;
   justify-content: center;
@@ -44,9 +43,6 @@
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  position: relative;
-}
-.gc-input-container:nth-child(2) {
   position: relative;
 }
 .rename-gc-input {
@@ -85,8 +81,8 @@
   color: #fff;
   margin: 1rem 0;
 }
-.add-to-gc-error,
-.rename-gc-error {
+.rename-gc-error,
+.add-gc-error {
   position: absolute;
   top: 85%;
   left: 50%;
@@ -95,7 +91,6 @@
   font-size: 0.8rem;
   font-weight: 700;
 }
-
 /* Media Queries */
 @media screen and (max-width: 540px) {
   .update-group-modal {
@@ -117,6 +112,10 @@
     color: #fff;
     font-size: 1rem;
   }
+  .add-gc-error,
+  .rename-gc-error {
+    font-size: 0.6rem;
+  }
 }
 @media screen and (max-width: 500px) {
   .update-group-modal {
@@ -137,5 +136,9 @@
 @media screen and (max-width: 320px) {
   .leave-gc-btn {
     padding: 0.8rem 0 0.8rem 5px;
+  }
+  .add-gc-error,
+  .rename-gc-error {
+    font-size: 0.5rem;
   }
 }

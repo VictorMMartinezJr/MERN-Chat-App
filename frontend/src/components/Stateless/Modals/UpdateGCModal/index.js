@@ -218,7 +218,7 @@ const UpdateGCModal = ({
               onBlur={() => setBottomInputActive(false)} // Remove active bottom border
               onChange={(e) => handleSearch(e.target.value)}
             />
-            <p className="add-to-gc-error">{addToGroupError}</p>
+            <p className="add-gc-error">{addToGroupError}</p>
           </div>
         </form>
         {searchResults?.slice(0, 4).map((user) => {
