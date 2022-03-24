@@ -12,7 +12,7 @@ Chit Chat is a web app built using MongoDb, Express, React, & NodeJS. It allows 
 ![chit-chat](https://user-images.githubusercontent.com/93169407/159960778-4ef463a3-e76a-4733-a33a-95d547fdaea3.png)
 ![chitchat-2](https://user-images.githubusercontent.com/93169407/159960820-09d85c9d-7357-4103-a2d6-72631917217f.png)
 ![chit-chat-victormtzcodes.herokuapp.com_(iPhone XR)](https://user-images.githubusercontent.com/93169407/159961198-2e5b7136-0b1a-4c11-a4c5-f27a2cec473f.png)
-![chit-chat-victormtzcodes.herokuapp.com_(iPhone XR) (1)](https://user-images.githubusercontent.com/93169407/159961348-3c160ec5-eeb9-4cdf-b21f-f9f50b325145.png))
+![Screenshot 2022-03-24 121526](https://user-images.githubusercontent.com/93169407/159961676-f3c8a98f-8aac-428f-95e9-65194887c47c.png)
 
 
 ### Technologies
