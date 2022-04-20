@@ -117,7 +117,7 @@ const NewGroupModal = ({ modalOpen, setModalOpen }) => {
             setRenameGroupError("");
           }}
         />
-        <h1 className="modal-header">Create New Group Chat</h1>
+        <h2 className="modal-header">Create New Group Chat</h2>
         <form className="modal-form">
           <div className="new-gc-name-input-container">
             <input

@@ -165,7 +165,7 @@ const UpdateGCModal = ({
             setAddToGroupError("");
           }}
         />
-        <h1 className="update-modal-header">{selectedChat.chatName}</h1>
+        <h2 className="update-modal-header">{selectedChat.chatName}</h2>
         <div className="user-badges">
           {selectedChat &&
             selectedChat.users.map((user) => (

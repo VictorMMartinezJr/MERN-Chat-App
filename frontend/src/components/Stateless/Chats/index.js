@@ -8,7 +8,7 @@ import { FiSearch } from "react-icons/fi";
 import sadMessage from "../../../assets/images/sad-message.svg";
 import Loader from "../Loader";
 
-const Chats = ({ setFetchAgain, fetchAgain }) => {
+const Chats = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [loggedUser, setLoggedUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -69,7 +69,7 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
       }
     >
       <span className="chats-header">
-        <h1 className="chats-title">Chats</h1>
+        <h2 className="chats-title">Chats</h2>
         <span className="chats-btns">
           <button className="new-chat-btn" onClick={() => setModalOpen(true)}>
             New Group
@@ -110,7 +110,7 @@ const Chats = ({ setFetchAgain, fetchAgain }) => {
           </div>
         ) : (
           <div className="no-chats">
-            {!isLoading && <h1>No chats</h1>}
+            {!isLoading && <h3>No chats</h3>}
             {!isLoading && <img src={sadMessage} alt="sad-message" />}
           </div>
         )}

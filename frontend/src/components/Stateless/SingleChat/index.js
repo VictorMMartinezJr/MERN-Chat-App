@@ -95,9 +95,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                       onClick={() => setSelectedChat("")}
                     />
                   )}
-                  <h1 className="chatbox-groupchat-title">
+                  <h2 className="chatbox-groupchat-title">
                     {selectedChat.chatName}
-                  </h1>
+                  </h2>
                   <p className="input-error">{messagesError}</p>
                 </div>
               ) : (
@@ -113,9 +113,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                       src={getSenderAvatar(user, selectedChat.users)}
                       alt="chat-user-avatar"
                     />
-                    <h1 className="chat-title">
+                    <h2 className="chat-title">
                       {toUpperCase(getSender(user, selectedChat.users))}
-                    </h1>
+                    </h2>
                   </span>
                   <p className="input-error">{messagesError}</p>
                 </div>

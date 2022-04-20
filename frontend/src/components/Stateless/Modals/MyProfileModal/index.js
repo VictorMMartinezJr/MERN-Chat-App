@@ -20,7 +20,7 @@ const MyProfileModal = ({ openProfile, setOpenProfile }) => {
           onClick={() => setOpenProfile(false)}
         />
         <div className="myprofile-modal-header">
-          <h1 className="myprofile-modal-name">{user.name}</h1>
+          <h2 className="myprofile-modal-name">{user.name}</h2>
           <p className="myprofile-modal-email">{user.email}</p>
         </div>
         <img
